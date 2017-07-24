@@ -6,9 +6,18 @@
   </div>
   <div class="col-sm-8">
     <h4>Cyclist details</h4>
+    <label for="dateOfBirth">Date of birth (e.g. 26/01/2003)</label>
+    <input type="text" name="dateOfBirth" class="form-control" [(ngModel)]="dateOfBirth" />
     <h4>Bike details</h4>
+    <label for="wheelSize">Wheel size (e.g. 700x23)</label>
+    <input type="text" name="wheelSize" class="form-control" [(ngModel)]="wheelSize" />
+    <label for="chainRingSize">Teeth on largest front chain ring (e.g. 34)</label>
+    <input type="text" name="chainRingSize" class="form-control" [(ngModel)]="chainRingSize" />
+    <hr>
+    <button class="btn btn-primary" (click)="checkGearing()">Check Gearing</button>
   </div>
   <div class="col-sm-4">
     <h4>Recommendations</h4>
+    <p>You have selected a wheel size of {{ wheelSize }} with a front chain ring size of {{ chainRingSize }} teeth for cyclist born on {{ dateOfBirth }}.</p>
   </div>
 </div>
