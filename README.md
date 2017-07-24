@@ -1,4 +1,10 @@
-# Bikefit
+# bikeFIT
+
+The original intention of this application is to provide a means for UK youth cyclists (or more likely their parents) to work out what gears need to be locked off on their child's road bike to meet racing criteria as defined by British Cycling.
+
+It's future features could include the ability to store bike and cyclist details (behind an authenticated mechanism), gear trading, bike fit analysis and guidance/recommendations. Also switch for specific competition regulations, such as Assen
+
+## Bikefit
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.3.
 
