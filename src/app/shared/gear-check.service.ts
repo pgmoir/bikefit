@@ -11,7 +11,12 @@ export class GearCheckService {
 
   calculateRestriction(gearCheckModel: GearCheckModel) {
     const headers = new Headers({'Content-Type': 'application=/json'});
-    return this.http.post('https://us-central1-bikefit-24ea3.cloudfunctions.net/calculateRestriction', gearCheckModel,
+    const url = 'https://us-central1-bikefit-24ea3.cloudfunctions.net/calculateRestriction?' +
+      'dateOfBirth=' + gearCheckModel.dateOfBirth +
+      '&largestGearFront=' + gearCheckModel.largestGearFront +
+      '&wheelSize=' + gearCheckModel.wheelSize;
+    console.log(url);
+    return this.http.get(url,
       {headers: headers})
       .map(
         (response: Response) => {

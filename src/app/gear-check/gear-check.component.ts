@@ -29,14 +29,15 @@ export class GearCheckComponent implements OnInit {
 
   checkGearing() {
     const toCheck: GearCheckModel = new GearCheckModel(this.getDateOfBirth(this.dateOfBirth), this.largestGearFront, this.wheelSize);
-
+    console.log(toCheck.dateOfBirth);
     this.gearCheckService.calculateRestriction(toCheck)
       .subscribe(
         (data: GearCheckModel) => {
           console.log(data);
 
           this.recommendation = 'This rider will ride in category ' + data.youthCategory + '. They are restricted to a rollout length of ' +
-          data.restrictionDistance + 'm. The smallest cog on the rear cassette that can be made available on ' +
+          data.restrictionDistance + 'm. The gear on the front has been specified as ' + data.largestGearFront +
+          '. The smallest cog on the rear cassette that can be made available on ' +
           'this bike should have ' + data.smallestGearRear + ' teeth. This is based on assumption that the tyre circumference ' +
           'for a 700x23 will be 2.099m, so the rollout on this gear will be ' + data.rolloutDistance.toFixed(3) + 'm.';
         },
