@@ -5,11 +5,13 @@ export class GearCheckModel {
   public largestGearFront: number;
   public wheelSize: string;
 
-  public ageAtStartYear: number;
+  public birthDate: Date;
+  public ageAtStart: number;
   public youthCategory: string;
   public restrictionDistance: number;
   public smallestGearRear: number;
   public rolloutDistance: number;
+  public tyreCircumference: number;
 
   constructor(dateOfBirth: number, largestGearFront: number, wheelSize: string) {
     this.dateOfBirth = dateOfBirth;

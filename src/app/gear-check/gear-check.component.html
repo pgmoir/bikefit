@@ -6,20 +6,38 @@
   </div>
   <div class="col-sm-8">
     <h4>Cyclist details</h4>
-    <label for="dateOfBirth">Date of birth (e.g. dd/mm/yyyy)</label>
-    <input type="text" name="dateOfBirth" class="form-control" [(ngModel)]="dateOfBirth" />
+    <div class="form-group">
+      <label for="dateOfBirth">Date of birth (e.g. dd/mm/yyyy)</label>
+      <ng2-datepicker [options]="dobOptions" class="form-control" [(ngModel)]="dateOfBirth" required></ng2-datepicker>
+    </div>
+    <hr>
     <h4>Bike details</h4>
-    <label for="wheelSize">Wheel size (e.g. 700x23) - sorry, this is the only option at the moment</label>
-    <input type="text" name="wheelSize" class="form-control" [(ngModel)]="wheelSize" />
-    <label for="largestGearFront">Teeth on largest front chain ring (e.g. 34)</label>
-    <input type="text" name="largestGearFront" class="form-control" [(ngModel)]="largestGearFront" />
+    <div class="form-group">
+      <label for="wheelSize">Wheel size (e.g. 700x23)</label>
+      <select [(ngModel)]="wheelSize" class="form-control" required>
+        <option *ngFor="let ws of wheelSizes" [ngValue]="ws">{{ws}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="largestGearFront">Teeth on largest front chain ring (e.g. 40)</label>
+      <select [(ngModel)]="largestGearFront" class="form-control" required>
+        <option *ngFor="let cr of chainRingSizes" [ngValue]="cr">{{cr}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="engineCategory">Nationality (e.g. GB or NL or US or FR)</label>
+      <select [(ngModel)]="engineCategory" class="form-control" required>
+        <option *ngFor="let ec of engineCategories" [ngValue]="ec">{{ec}}</option>
+      </select>
+    </div>
     <hr>
     <button class="btn btn-primary" (click)="checkGearing()">Check Gearing</button>
   </div>
   <div class="col-sm-4">
     <h4>Recommendations</h4>
-    <p>You have selected a wheel size of {{ wheelSize }} with a front chain ring size of {{ chainRingSize }} teeth for cyclist born on {{ dateOfBirth }}.</p>
+    <p>You have selected a wheel size of {{ wheelSize }} with a front chain ring size of {{ largestGearFront }} teeth for cyclist born on {{ dateOfBirth.formatted }} and riding according to {{ engineCategory }} regulations.</p>
     <hr>
     <p>{{ recommendation }}</p>
+    <app-gear-check-result></app-gear-check-result>
   </div>
 </div>
