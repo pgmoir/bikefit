@@ -1,3 +1,5 @@
+import { GearCheckModel } from './../../shared/gear-check.model';
+import { GearCheckEngineService } from './../../shared/gear-check-engine.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GearCheckResultComponent implements OnInit {
 
-  constructor() { }
+  public result: GearCheckModel;
+
+  constructor(private gearCheckEngineService: GearCheckEngineService) { }
 
   ngOnInit() {
+    // console.log('resyult component');
+    // this.result = this.gearCheckEngineService.gearCheckModel;
   }
 
 }

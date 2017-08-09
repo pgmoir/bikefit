@@ -1,22 +1,20 @@
+import { GearOptionsModel } from './gear-options.model';
+
 export class GearCheckModel {
   // base initialisation properties
-  public dateOfBirth: number;
-  public largestChainRing: number;
-  public wheelSize: string;
-  public gender: string;
+  public options: GearOptionsModel;
+
   // calculated properties
   public birthDate: Date;
-  public age: number;
+  public ageAtStart: number;
   public youthCategory: string;
   public restrictionDistance: number;
   public smallestGear: number;
   public rolloutDistance: number;
   public tyreCircumference: number;
+  public validResult: boolean;
 
-  constructor(dateOfBirth: number, largestChainRing: number, wheelSize: string, gender: string) {
-    this.dateOfBirth = dateOfBirth;
-    this.largestChainRing = largestChainRing;
-    this.wheelSize = wheelSize;
-    this.gender = gender;
+  constructor(options: GearOptionsModel) {
+    this.options = options;
   }
 }

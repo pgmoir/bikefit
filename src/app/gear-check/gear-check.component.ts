@@ -4,6 +4,7 @@ import { Response } from '@angular/http';
 import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 
 import { GearCheckModel } from './../shared/gear-check.model';
+import { GearOptionsModel } from './../shared/gear-options.model';
 import { GearCheckService } from './../shared/gear-check.service';
 import { GearCheckEngineService } from './../shared/gear-check-engine.service';
 
@@ -58,32 +59,29 @@ export class GearCheckComponent implements OnInit {
   }
 
   checkGearing() {
-    const toCheck: GearCheckModel = new GearCheckModel(this.getDateOfBirth(), this.largestChainRing, this.wheelSize, this.gender);
+    const gearOptions: GearOptionsModel =
+      new GearOptionsModel(this.getDateOfBirth(), this.largestChainRing, this.wheelSize, this.gender, this.engineCategory);
     // this.gearCheckService.calculateRestriction(toCheck)
     //   .subscribe(
     //     (data: GearCheckModel) => {
     //       console.log(data);
 
-    //       this.recommendation = 'This rider will ride in category ' + data.youthCategory +
-    //      '. They are restricted to a rollout length of ' +
-    //       data.restrictionDistance + 'm. The gear on the front has been specified as ' + data.largestChainRing +
-    //       '. The smallest cog on the rear cassette that can be made available on ' +
-    //       'this bike should have ' + data.smallestGear + ' teeth. This is based on assumption that the tyre circumference ' +
-    //       'for a 700x23 will be 2.099m, so the rollout on this gear will be ' + data.rolloutDistance.toFixed(3) + 'm.';
+    //       this.recommendation = '';
     //     },
     //     (error) => console.log(error)
     //   );
 
-    const result = this.gearCheckEngineService['Youth' + this.engineCategory](toCheck);
-    this.recommendation = 'This ' + this.gender + ' rider, aged ' + result.age +
-      ' at the start of the year, in ' + this.engineCategory +
-      ' will ride in category ' + result.youthCategory +
-      '. They are restricted to a rollout length of ' +
-      result.restrictionDistance + 'm. The largest gear (chain ring) on the front has been specified as having ' +
-      result.largestChainRing + ' teeth. The smallest cog on the rear cassette that can be made available on ' +
-      'this bike should have ' + result.smallestGear + ' teeth. This is based on assumption that the tyre circumference ' +
-      'for a ' + result.wheelSize + ' wheel will be ' + result.tyreCircumference + 'm, so the rollout on this gear will be ' +
-      result.rolloutDistance.toFixed(3) + 'm.';
+    const result: GearCheckModel = this.gearCheckEngineService.getResult(gearOptions);
+    console.log(result);
+    // this.recommendation = 'This ' + this.gender + ' rider, aged ' + result.age +
+    //   ' at the start of the year, in ' + this.engineCategory +
+    //   ' will ride in category ' + result.youthCategory +
+    //   '. They are restricted to a rollout length of ' +
+    //   result.restrictionDistance + 'm. The largest gear (chain ring) on the front has been specified as having ' +
+    //   result.largestChainRing + ' teeth. The smallest cog on the rear cassette that can be made available on ' +
+    //   'this bike should have ' + result.smallestGear + ' teeth. This is based on assumption that the tyre circumference ' +
+    //   'for a ' + result.wheelSize + ' wheel will be ' + result.tyreCircumference + 'm, so the rollout on this gear will be ' +
+    //   result.rolloutDistance.toFixed(3) + 'm.';
   }
 
   getDateOfBirth() {
