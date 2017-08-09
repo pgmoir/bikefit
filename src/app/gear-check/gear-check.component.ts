@@ -13,8 +13,9 @@ import { GearCheckEngineService } from './../shared/gear-check-engine.service';
   styleUrls: ['./gear-check.component.css']
 })
 export class GearCheckComponent implements OnInit {
+  gender: string;
   wheelSize: string;
-  largestGearFront: number;
+  largestChainRing: number;
   engineCategory: string;
   recommendation: string;
   restriction: number;
@@ -23,7 +24,8 @@ export class GearCheckComponent implements OnInit {
   dateOfBirth: DateModel;
   dobOptions: DatePickerOptions;
 
-  wheelSizes: string[] = [ '700x23', '700x25', '700x27', '650x23', '650x25', '650x27' ];
+  genders: string[] = [ 'male', 'female' ];
+  wheelSizes: string[] = [ '700x23', '700x25', '700x28', '650x23', '650x25', '650x28' ];
   engineCategories: string[] = [ 'GB', 'NL' ];
   chainRingSizes: number[] = [ 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54 ];
 
@@ -32,7 +34,7 @@ export class GearCheckComponent implements OnInit {
       {
         style: 'bold',
         locale: 'en-GB',
-        initialDate: new Date(2003, 0, 1),
+        initialDate: new Date(2003, 9, 5),
         format: 'DD/MM/YYYY'
       }
     );
@@ -48,14 +50,15 @@ export class GearCheckComponent implements OnInit {
         momentObj: null
       }
     );
+    this.gender = 'female';
     this.wheelSize = '700x23';
-    this.largestGearFront = 40;
+    this.largestChainRing = 48;
     this.engineCategory = 'GB';
     this.recommendation = '';
   }
 
   checkGearing() {
-    const toCheck: GearCheckModel = new GearCheckModel(this.getDateOfBirth(), this.largestGearFront, this.wheelSize);
+    const toCheck: GearCheckModel = new GearCheckModel(this.getDateOfBirth(), this.largestChainRing, this.wheelSize, this.gender);
     // this.gearCheckService.calculateRestriction(toCheck)
     //   .subscribe(
     //     (data: GearCheckModel) => {
@@ -63,21 +66,22 @@ export class GearCheckComponent implements OnInit {
 
     //       this.recommendation = 'This rider will ride in category ' + data.youthCategory +
     //      '. They are restricted to a rollout length of ' +
-    //       data.restrictionDistance + 'm. The gear on the front has been specified as ' + data.largestGearFront +
+    //       data.restrictionDistance + 'm. The gear on the front has been specified as ' + data.largestChainRing +
     //       '. The smallest cog on the rear cassette that can be made available on ' +
-    //       'this bike should have ' + data.smallestGearRear + ' teeth. This is based on assumption that the tyre circumference ' +
+    //       'this bike should have ' + data.smallestGear + ' teeth. This is based on assumption that the tyre circumference ' +
     //       'for a 700x23 will be 2.099m, so the rollout on this gear will be ' + data.rolloutDistance.toFixed(3) + 'm.';
     //     },
     //     (error) => console.log(error)
     //   );
 
     const result = this.gearCheckEngineService['Youth' + this.engineCategory](toCheck);
-    this.recommendation = 'This rider in ' + this.engineCategory +
+    this.recommendation = 'This ' + this.gender + ' rider, aged ' + result.age +
+      ' at the start of the year, in ' + this.engineCategory +
       ' will ride in category ' + result.youthCategory +
       '. They are restricted to a rollout length of ' +
       result.restrictionDistance + 'm. The largest gear (chain ring) on the front has been specified as having ' +
-      result.largestGearFront + ' teeth. The smallest cog on the rear cassette that can be made available on ' +
-      'this bike should have ' + result.smallestGearRear + ' teeth. This is based on assumption that the tyre circumference ' +
+      result.largestChainRing + ' teeth. The smallest cog on the rear cassette that can be made available on ' +
+      'this bike should have ' + result.smallestGear + ' teeth. This is based on assumption that the tyre circumference ' +
       'for a ' + result.wheelSize + ' wheel will be ' + result.tyreCircumference + 'm, so the rollout on this gear will be ' +
       result.rolloutDistance.toFixed(3) + 'm.';
   }

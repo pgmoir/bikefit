@@ -13,7 +13,7 @@ export class GearCheckService {
     const headers = new Headers({'Content-Type': 'application=/json'});
     const url = 'https://us-central1-bikefit-24ea3.cloudfunctions.net/calculateRestriction?' +
       'dateOfBirth=' + gearCheckModel.dateOfBirth +
-      '&largestGearFront=' + gearCheckModel.largestGearFront +
+      '&largestChainRing=' + gearCheckModel.largestChainRing +
       '&wheelSize=' + gearCheckModel.wheelSize;
     console.log(url);
     return this.http.get(url,

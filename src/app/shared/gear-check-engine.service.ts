@@ -1,4 +1,5 @@
 import { OnInit } from '@angular/core';
+import _ from 'lodash';
 
 import { GearCheckModel } from './gear-check.model';
 
@@ -9,7 +10,7 @@ export class GearCheckEngineService {
   initialise(gearCheckModel: GearCheckModel) {
     this.gearCheckModel = gearCheckModel;
     this.gearCheckModel.birthDate = this.getBirthDate();
-    this.gearCheckModel.smallestGearRear = 0;
+    this.gearCheckModel.smallestGear = 0;
     this.gearCheckModel.rolloutDistance = 0;
   }
 
@@ -23,21 +24,54 @@ export class GearCheckEngineService {
   getAgeAtStartOfYear(nextYear: boolean) {
     const year = new Date().getFullYear();
     const startOfYear = new Date(nextYear ? year + 1 : year, 0, 1);
+    console.log('startofyear: ' + startOfYear);
+    console.log('birthdate: ' + this.gearCheckModel.birthDate);
     const timeDiff = Math.abs(startOfYear.getTime() - this.gearCheckModel.birthDate.getTime());
     return Math.floor(timeDiff / (1000 * 3600 * 24 * 365));
   }
 
+  getCategory(age: number, gender: string, categories) {
+    for (let i = 0; i < categories.length; i++) {
+      if (categories[i].hasOwnProperty('ageUnder')) {
+        if (age < categories[i].ageUnder &&
+          (categories[i].gender === 'any' || categories[i].gender === gender)) {
+            console.log(categories[i]);
+          return categories[i];
+        }
+      } else if (categories[i].hasOwnProperty('ageAt')) {
+        if (age <= categories[i].ageAt &&
+          (categories[i].gender === 'any' || categories[i].gender === gender)) {
+          return categories[i];
+        }
+      }
+    }
+  }
+
+  getTyreCircumference(wheelSize: string) {
+    const wheelSizes = [
+      { wheelSize: '700x23', tyreCircumference: 2.09858 },
+      { wheelSize: '700x25', tyreCircumference: 2.11115 },
+      { wheelSize: '700x28', tyreCircumference: 2.13000 },
+      { wheelSize: '650x23', tyreCircumference: 1.97920 },
+      { wheelSize: '650x25', tyreCircumference: 1.99177 },
+      { wheelSize: '650x28', tyreCircumference: 2.01062 }
+    ];
+    return _.find(wheelSizes, (item) => (
+      item.wheelSize === wheelSize
+    )).tyreCircumference;
+  }
+
   setGearRatio() {
-    this.gearCheckModel.tyreCircumference = 2.099;
+    this.gearCheckModel.tyreCircumference = this.getTyreCircumference(this.gearCheckModel.wheelSize);
 
     const getRollout = (rearTeeth) => {
-        return this.gearCheckModel.tyreCircumference * this.gearCheckModel.largestGearFront / rearTeeth;
+        return this.gearCheckModel.tyreCircumference * this.gearCheckModel.largestChainRing / rearTeeth;
     };
 
     for (let rearTeeth = 10; rearTeeth < 40; rearTeeth++) {
         const rollout = getRollout(rearTeeth);
         if (rollout < this.gearCheckModel.restrictionDistance) {
-            this.gearCheckModel.smallestGearRear = rearTeeth;
+            this.gearCheckModel.smallestGear = rearTeeth;
             this.gearCheckModel.rolloutDistance = rollout;
             break;
         }
@@ -49,93 +83,53 @@ export class GearCheckEngineService {
   }
 
   YouthGB(gearCheckModel: GearCheckModel) {
-    const categoryGB = () => {
-      if (this.gearCheckModel.ageAtStart < 8) {
-        return 'Youth E';
-      } else if (this.gearCheckModel.ageAtStart < 10) {
-        return 'Youth D';
-      } else if (this.gearCheckModel.ageAtStart < 12) {
-        return 'Youth C';
-      } else if (this.gearCheckModel.ageAtStart < 14) {
-        return 'Youth B';
-      } else if (this.gearCheckModel.ageAtStart < 16) {
-        return 'Youth A';
-      } else if (this.gearCheckModel.ageAtStart < 18) {
-        return 'Junior';
-      } else {
-        return 'Not Youth';
-      }
-    };
-
-    const getRestrictionGB = () => {
-      switch (this.gearCheckModel.youthCategory) {
-        case 'Youth E':
-          return 5.1;
-        case 'Youth D':
-          return 5.4;
-        case 'Youth C':
-          return 6.05;
-        case 'Youth B':
-          return 6.45;
-        case 'Youth A':
-          return 6.93;
-        case 'Junior':
-          return 7.93;
-        default:
-          return 0;
-      }
-    };
+    console.log('checking age');
+      const categories = [
+        { ageUnder: 8, gender: 'any', title: 'Youth E', restriction: 5.1 },
+        { ageUnder: 10, gender: 'any', title: 'Youth D', restriction: 5.4 },
+        { ageUnder: 12, gender: 'any', title: 'Youth C', restriction: 6.05 },
+        { ageUnder: 14, gender: 'any', title: 'Youth B', restriction: 6.45 },
+        { ageUnder: 16, gender: 'any', title: 'Youth A', restriction: 6.93 },
+        { ageUnder: 18, gender: 'any', title: 'Junior', restriction: 7.93 }
+      ];
 
     this.initialise(gearCheckModel);
-    this.gearCheckModel.ageAtStart = this.getAgeAtStartOfYear(false);
-    this.gearCheckModel.youthCategory = categoryGB();
-    this.gearCheckModel.restrictionDistance = getRestrictionGB();
+    console.log('checking age');
+    this.gearCheckModel.age = this.getAgeAtStartOfYear(false);
+    const category = this.getCategory(this.gearCheckModel.age, this.gearCheckModel.gender, categories);
+    this.gearCheckModel.youthCategory = category.title;
+    this.gearCheckModel.restrictionDistance = category.restriction;
     this.setGearRatio();
     return this.getModelResult();
   }
 
   YouthNL(gearCheckModel: GearCheckModel) {
-    const categoryNL = () => {
-      if (this.gearCheckModel.ageAtStart < 8) {
-        return 'Youth E';
-      } else if (this.gearCheckModel.ageAtStart < 10) {
-        return 'Youth D';
-      } else if (this.gearCheckModel.ageAtStart < 12) {
-        return 'Youth C';
-      } else if (this.gearCheckModel.ageAtStart < 14) {
-        return 'Youth B';
-      } else if (this.gearCheckModel.ageAtStart < 16) {
-        return 'Youth A';
-      } else if (this.gearCheckModel.ageAtStart < 18) {
-        return 'Junior';
-      } else {
-        return 'Not Youth';
-      }
-    };
-
-    const getRestrictionNL = () => {
-      switch (this.gearCheckModel.youthCategory) {
-        case 'Youth E':
-          return 6.1;
-        case 'Youth D':
-          return 6.4;
-        case 'Youth C':
-          return 7.05;
-        case 'Youth B':
-          return 7.45;
-        case 'Youth A':
-          return 7.93;
-        case 'Junior':
-          return 8.93;
-        default:
-          return 0;
-      }
-    };
+    console.log('checking age');
+      const categories = [
+        { ageUnder: 8, gender: 'male', title: 'Cat I', restriction: 5.46 },
+        { ageUnder: 9, gender: 'female', title: 'Cat I', restriction: 5.46 },
+        { ageUnder: 9, gender: 'male', title: 'Cat II', restriction: 5.46 },
+        { ageUnder: 10, gender: 'female', title: 'Cat II', restriction: 5.46 },
+        { ageUnder: 10, gender: 'male', title: 'Cat III', restriction: 5.78 },
+        { ageUnder: 11, gender: 'female', title: 'Cat III', restriction: 5.78 },
+        { ageUnder: 11, gender: 'male', title: 'Cat IV', restriction: 5.78 },
+        { ageUnder: 12, gender: 'female', title: 'Cat IV', restriction: 5.78 },
+        { ageUnder: 12, gender: 'male', title: 'Cat V', restriction: 6.14 },
+        { ageUnder: 13, gender: 'female', title: 'Cat V', restriction: 6.14 },
+        { ageUnder: 13, gender: 'male', title: 'Cat VI', restriction: 6.14 },
+        { ageUnder: 14, gender: 'female', title: 'Cat VI', restriction: 6.14 },
+        { ageUnder: 14, gender: 'male', title: 'Cat VII', restriction: 6.55 },
+        { ageUnder: 16, gender: 'male', title: 'Nieuwelingen', restriction: 7.01 },
+        { ageUnder: 16, gender: 'female', title: 'Nieuwelingen-girls', restriction: 7.01 },
+        { ageUnder: 18, gender: 'male', title: 'Junioren-ladies', restriction: 7.93 },
+        { ageUnder: 18, gender: 'female', title: 'Nieuwelingen-girls', restriction: 7.93 }
+      ];
 
     this.initialise(gearCheckModel);
-    this.gearCheckModel.ageAtStart = this.getAgeAtStartOfYear(false);
-    this.gearCheckModel.youthCategory = categoryNL();
-    this.gearCheckModel.restrictionDistance = getRestrictionNL();
+    this.gearCheckModel.age = this.getAgeAtStartOfYear(false);
+    const category = this.getCategory(this.gearCheckModel.age, this.gearCheckModel.gender, categories);
+    this.gearCheckModel.youthCategory = category.title;
+    this.gearCheckModel.restrictionDistance = category.restriction;
     this.setGearRatio();
     return this.getModelResult();
   }
