@@ -3,28 +3,28 @@ import { Http, Headers, Response } from '@angular/http';
 import 'rxjs/Rx';
 
 import { GearOptionsModel } from './gear-options.model';
+import { UrlHelperService } from './url-helper.service';
 
 @Injectable()
 
 export class GearCheckService {
-  constructor(private http: Http) {}
+
+  private urlCalculateRestrition = 'https://us-central1-bikefit-24ea3.cloudfunctions.net/calculateRestriction?';
+  // private urlCalculateRestrition = 'http://localhost:5000/bikefit-24ea3/us-central1/calculateRestriction?';
+
+  constructor(private http: Http, private urlHelperService: UrlHelperService) {}
 
   calculateRestriction(gearOptionsModel: GearOptionsModel) {
-    // const headers = new Headers({'Content-Type': 'application=/json'});
-    // const url = 'https://us-central1-bikefit-24ea3.cloudfunctions.net/calculateRestriction?' +
-    //   'dateOfBirth=' + gearOptionsModel.dateOfBirth +
-    //   '&gender=' + gearOptionsModel.gender +
-    //   '&largestChainRing=' + gearOptionsModel.largestChainRing +
-    //   '&wheelSize=' + gearOptionsModel.wheelSize +
-    //   '&country=' + gearOptionsModel.country;
-    // console.log(url);
-    // return this.http.get(url,
-    //   {headers: headers})
-    //   .map(
-    //     (response: Response) => {
-    //       const data = response.json();
-    //       return data;
-    //     }
-    //   );
+    const headers = new Headers({'Content-Type': 'application=/json'});
+    const url = this.urlHelperService.getUrl(this.urlCalculateRestrition, gearOptionsModel);
+
+    return this.http.get(url,
+      {headers: headers})
+      .map(
+        (response: Response) => {
+          const data = response.json();
+          return data;
+        }
+      );
   }
 }

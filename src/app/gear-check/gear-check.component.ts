@@ -6,7 +6,6 @@ import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 import { GearCheckModel } from './../shared/gear-check.model';
 import { GearOptionsModel } from './../shared/gear-options.model';
 import { GearCheckService } from './../shared/gear-check.service';
-import { GearCheckEngineService } from './../shared/gear-check-engine.service';
 
 @Component({
   selector: 'app-gear-check',
@@ -19,18 +18,15 @@ export class GearCheckComponent implements OnInit {
   largestChainRing: number;
   engineCategory: string;
   recommendation: string;
-  restriction: number;
-  tyreCircumference: number;
-  category: string;
   dateOfBirth: DateModel;
   dobOptions: DatePickerOptions;
 
-  genders: string[] = [ 'male', 'female' ];
-  wheelSizes: string[] = [ '700x23', '700x25', '700x28', '650x23', '650x25', '650x28' ];
-  engineCategories: string[] = [ 'GB', 'NL' ];
-  chainRingSizes: number[] = [ 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54 ];
+  genders: string[] = ['male', 'female'];
+  wheelSizes: string[] = ['700x23', '700x25', '700x28', '650x23', '650x25', '650x28'];
+  engineCategories: string[] = ['GB', 'NL'];
+  chainRingSizes: number[] = [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54];
 
-  constructor(private gearCheckService: GearCheckService, private gearCheckEngineService: GearCheckEngineService) {
+  constructor(private gearCheckService: GearCheckService) {
     this.dobOptions = new DatePickerOptions(
       {
         style: 'bold',
@@ -59,29 +55,15 @@ export class GearCheckComponent implements OnInit {
   }
 
   checkGearing() {
-    const gearOptions: GearOptionsModel =
-      new GearOptionsModel(this.getDateOfBirth(), this.largestChainRing, this.wheelSize, this.gender, this.engineCategory);
-    // this.gearCheckService.calculateRestriction(toCheck)
-    //   .subscribe(
-    //     (data: GearCheckModel) => {
-    //       console.log(data);
+    const options = new GearOptionsModel(this.getDateOfBirth(), this.largestChainRing, this.wheelSize, this.gender, this.engineCategory);
 
-    //       this.recommendation = '';
-    //     },
-    //     (error) => console.log(error)
-    //   );
-
-    const result: GearCheckModel = this.gearCheckEngineService.getResult(gearOptions);
-    console.log(result);
-    // this.recommendation = 'This ' + this.gender + ' rider, aged ' + result.age +
-    //   ' at the start of the year, in ' + this.engineCategory +
-    //   ' will ride in category ' + result.youthCategory +
-    //   '. They are restricted to a rollout length of ' +
-    //   result.restrictionDistance + 'm. The largest gear (chain ring) on the front has been specified as having ' +
-    //   result.largestChainRing + ' teeth. The smallest cog on the rear cassette that can be made available on ' +
-    //   'this bike should have ' + result.smallestGear + ' teeth. This is based on assumption that the tyre circumference ' +
-    //   'for a ' + result.wheelSize + ' wheel will be ' + result.tyreCircumference + 'm, so the rollout on this gear will be ' +
-    //   result.rolloutDistance.toFixed(3) + 'm.';
+    this.gearCheckService.calculateRestriction(options)
+      .subscribe((data: GearCheckModel) => {
+        console.log(data);
+        this.recommendation = data.recommendation;
+      },
+      (error) => console.log(error)
+      );
   }
 
   getDateOfBirth() {

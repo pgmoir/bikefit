@@ -6,8 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { GearCheckComponent } from './gear-check/gear-check.component';
 import { GearCheckService } from './shared/gear-check.service';
-import { GearCheckEngineService } from './shared/gear-check-engine.service';
-import { GearCheckResultComponent } from './gear-check/gear-check-result/gear-check-result.component';
+import { UrlHelperService } from './shared/url-helper.service';
 import { DropDownDirective } from './shared/dropdown.directive';
 import { DatePickerModule } from 'ng2-datepicker';
 
@@ -15,7 +14,6 @@ import { DatePickerModule } from 'ng2-datepicker';
   declarations: [
     AppComponent,
     GearCheckComponent,
-    GearCheckResultComponent,
     DropDownDirective
   ],
   imports: [
@@ -24,7 +22,7 @@ import { DatePickerModule } from 'ng2-datepicker';
     HttpModule,
     DatePickerModule
   ],
-  providers: [GearCheckService, GearCheckEngineService],
+  providers: [GearCheckService, UrlHelperService],
   bootstrap: [AppComponent]
 })
 

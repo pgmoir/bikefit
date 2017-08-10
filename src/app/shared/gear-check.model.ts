@@ -13,6 +13,7 @@ export class GearCheckModel {
   public rolloutDistance: number;
   public tyreCircumference: number;
   public validResult: boolean;
+  public recommendation: string;
 
   constructor(options: GearOptionsModel) {
     this.options = options;
