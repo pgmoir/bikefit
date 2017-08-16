@@ -58,11 +58,11 @@ export class GearCheckComponent implements OnInit {
     const options = new GearOptionsModel(this.getDateOfBirth(), this.largestChainRing, this.wheelSize, this.gender, this.engineCategory);
 
     this.gearCheckService.calculateRestriction(options)
-      .subscribe((data: GearCheckModel) => {
-        console.log(data);
-        this.recommendation = data.recommendation;
-      },
-      (error) => console.log(error)
+      .subscribe(
+        (data: GearCheckModel) => {
+          this.recommendation = data.recommendation;
+        },
+        (error) => console.log(error)
       );
   }
 

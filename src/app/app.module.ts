@@ -9,12 +9,20 @@ import { GearCheckService } from './shared/gear-check.service';
 import { UrlHelperService } from './shared/url-helper.service';
 import { DropDownDirective } from './shared/dropdown.directive';
 import { DatePickerModule } from 'ng2-datepicker';
+import { GearCheckResultComponent } from './gear-check/gear-check-result/gear-check-result.component';
+import { GearCheckCyclistComponent } from './gear-check/gear-check-cyclist/gear-check-cyclist.component';
+import { GearCheckBikeComponent } from './gear-check/gear-check-bike/gear-check-bike.component';
+import { DateControlComponent } from './common/date-control/date-control.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GearCheckComponent,
-    DropDownDirective
+    DropDownDirective,
+    GearCheckResultComponent,
+    GearCheckCyclistComponent,
+    GearCheckBikeComponent,
+    DateControlComponent
   ],
   imports: [
     BrowserModule,
