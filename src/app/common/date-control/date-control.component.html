@@ -1,4 +1,4 @@
-<div class="input-group">
+<div class="input-group" [ngClass]="{ 'has-error': !valid }">
   <select [(ngModel)]="day" class="form-control" required (change)="onSelect()">
     <option *ngFor="let dd of days" [ngValue]="dd">{{dd}}</option>
   </select>

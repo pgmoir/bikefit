@@ -1,3 +1,7 @@
-<p>
-  gear-check-result works!
+<p *ngIf="resultsSet; else noResults">
+
 </p>
+<ng-template #noResults>
+  <p>Complete the form and click on "Check Gearing" button to see advice and recommendations on bike set up.</p>
+</ng-template>
+

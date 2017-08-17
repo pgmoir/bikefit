@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./gear-check-result.component.css']
 })
 export class GearCheckResultComponent implements OnInit {
+  resultsSet = false;
 
   constructor() { }
 
