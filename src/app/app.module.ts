@@ -13,6 +13,7 @@ import { GearCheckResultComponent } from './gear-check/gear-check-result/gear-ch
 import { GearCheckCyclistComponent } from './gear-check/gear-check-cyclist/gear-check-cyclist.component';
 import { GearCheckBikeComponent } from './gear-check/gear-check-bike/gear-check-bike.component';
 import { DateControlComponent } from './common/date-control/date-control.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DateControlComponent } from './common/date-control/date-control.compone
     GearCheckResultComponent,
     GearCheckCyclistComponent,
     GearCheckBikeComponent,
-    DateControlComponent
+    DateControlComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

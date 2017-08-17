@@ -4,7 +4,9 @@
     <p>This page allows you to enter details for the youth road cyclist and their bike. Based on the British Cycling road racing restrictions, it will give you recommendations on gearing limitations that have to be applied.</p>
     <p>These are just recommendations, and you should still manually check the roll out of the bicycle according to BC guidelines.</p>
   </div>
-  <div class="col-sm-8">
+</div>
+<div class="row">
+  <div class="col-sm-6">
     <h4>Cyclist details</h4>
     <div class="form-group">
       <label for="dateOfBirth">Date of birth (e.g. dd/mm/yyyy)</label>
@@ -41,7 +43,7 @@
     <app-gear-check-bike></app-gear-check-bike>
     <button class="btn btn-primary" (click)="checkGearing()">Check Gearing</button>
   </div>
-  <div class="col-sm-4">
+  <div class="col-sm-6">
     <h4>Recommendations</h4>
     <p>You have selected a wheel size of {{ wheelSize }} with a front chain ring size of {{ largestChainRing }} teeth for cyclist born on {{ dateOfBirth.formatted }} and riding according to {{ engineCategory }} regulations.</p>
     <hr>
