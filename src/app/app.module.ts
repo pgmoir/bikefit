@@ -21,7 +21,6 @@ import { BikeDetailComponent } from './bikes/bike-detail/bike-detail.component';
 import { BikeItemComponent } from './bikes/bike-list/bike-item/bike-item.component';
 import { CyclistsComponent } from './cyclists/cyclists.component';
 import { CyclistListComponent } from './cyclists/cyclist-list/cyclist-list.component';
-import { CyclistDetailComponent } from './cyclists/cyclist-detail/cyclist-detail.component';
 import { CyclistEditComponent } from './cyclists/cyclist-list/cyclist-edit/cyclist-edit.component';
 
 @NgModule({
@@ -41,7 +40,6 @@ import { CyclistEditComponent } from './cyclists/cyclist-list/cyclist-edit/cycli
     BikeItemComponent,
     CyclistsComponent,
     CyclistListComponent,
-    CyclistDetailComponent,
     CyclistEditComponent
   ],
   imports: [
