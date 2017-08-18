@@ -1,0 +1,8 @@
+<div class="input-group" [ngClass]="{ 'has-error': !valid }">
+    <select [(ngModel)]="rimSize" class="form-control" required (change)="onSelect()">
+      <option *ngFor="let rim of rimSizes" [ngValue]="rim">{{rim}}</option>
+    </select>
+    <select [(ngModel)]="tyreSize" class="form-control" required (change)="onSelect()">
+      <option *ngFor="let tyre of tyreSizes" [ngValue]="tyre">{{tyre}}</option>
+    </select>
+  </div>

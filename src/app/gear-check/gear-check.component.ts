@@ -1,3 +1,5 @@
+import { Bike } from './../shared/bike.model';
+import { Cyclist } from './../shared/cyclist.model';
 import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 
@@ -15,6 +17,8 @@ import { GearCheckService } from './../shared/gear-check.service';
 export class GearCheckComponent implements OnInit {
   gender: string;
   wheelSize: string;
+  rimSize: string;
+  tyreSize: string;
   largestChainRing: number;
   engineCategory: string;
   recommendation: string;
@@ -23,6 +27,8 @@ export class GearCheckComponent implements OnInit {
 
   genders: string[] = ['male', 'female'];
   wheelSizes: string[] = ['700x23', '700x25', '700x28', '650x23', '650x25', '650x28'];
+  rimSizes: string[] = ['700x23', '700x25', '700x28', '650x23', '650x25', '650x28'];
+  tyreSizes: string[] = ['700x23', '700x25', '700x28', '650x23', '650x25', '650x28'];
   engineCategories: string[] = ['GB', 'NL'];
   chainRingSizes: number[] = [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54];
 
@@ -55,7 +61,9 @@ export class GearCheckComponent implements OnInit {
   }
 
   checkGearing() {
-    const options = new GearOptionsModel(this.getDateOfBirth(), this.largestChainRing, this.wheelSize, this.gender, this.engineCategory);
+    const cyclist: Cyclist = new Cyclist('', '', this.gender, this.getDateOfBirth());
+    const bike: Bike = new Bike('', '', '', this.rimSize, this.tyreSize, this.largestChainRing);
+    const options = new GearOptionsModel(cyclist, bike, this.engineCategory);
 
     this.gearCheckService.calculateRestriction(options)
       .subscribe(

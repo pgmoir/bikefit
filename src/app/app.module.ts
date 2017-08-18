@@ -14,6 +14,15 @@ import { GearCheckCyclistComponent } from './gear-check/gear-check-cyclist/gear-
 import { GearCheckBikeComponent } from './gear-check/gear-check-bike/gear-check-bike.component';
 import { DateControlComponent } from './common/date-control/date-control.component';
 import { HeaderComponent } from './header/header.component';
+import { WheelSizeComponent } from './common/wheel-size/wheel-size.component';
+import { BikesComponent } from './bikes/bikes.component';
+import { BikeListComponent } from './bikes/bike-list/bike-list.component';
+import { BikeDetailComponent } from './bikes/bike-detail/bike-detail.component';
+import { BikeItemComponent } from './bikes/bike-list/bike-item/bike-item.component';
+import { CyclistsComponent } from './cyclists/cyclists.component';
+import { CyclistListComponent } from './cyclists/cyclist-list/cyclist-list.component';
+import { CyclistItemComponent } from './cyclists/cyclist-list/cyclist-item/cyclist-item.component';
+import { CyclistDetailComponent } from './cyclists/cyclist-detail/cyclist-detail.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +33,16 @@ import { HeaderComponent } from './header/header.component';
     GearCheckCyclistComponent,
     GearCheckBikeComponent,
     DateControlComponent,
-    HeaderComponent
+    HeaderComponent,
+    WheelSizeComponent,
+    BikesComponent,
+    BikeListComponent,
+    BikeDetailComponent,
+    BikeItemComponent,
+    CyclistsComponent,
+    CyclistListComponent,
+    CyclistItemComponent,
+    CyclistDetailComponent
   ],
   imports: [
     BrowserModule,
