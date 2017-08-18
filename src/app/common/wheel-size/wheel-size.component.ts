@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-wheel-size',
@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WheelSizeComponent implements OnInit {
 
-  rimSize: string;
-  tyreSize: string;
+  @Input() rimSize: string;
+  @Input() tyreSize: string;
   valid = false;
 
   rimSizes: string[] = ['28inch', '27inch', '700c/29er', '650b/27.5', '650c', '26inch mtb', '24inch S5', '24inch E6',

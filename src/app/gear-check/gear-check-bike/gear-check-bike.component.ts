@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { Bike } from './../../shared/models/bike.model';
 
 @Component({
   selector: 'app-gear-check-bike',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GearCheckBikeComponent implements OnInit {
 
+  @Input() bike: Bike;
+  chainRingSizes: number[] = [47, 48, 49, 50];
+
   constructor() { }
 
   ngOnInit() {
+    console.log(this.bike);
   }
 
 }

@@ -9,8 +9,8 @@ import { Cyclist } from './../../shared/models/cyclist.model';
 })
 export class CyclistListComponent implements OnInit {
   cyclists: Cyclist[] = [
-    new Cyclist('Phil', 'Smith', 'male', 20030715),
-    new Cyclist('Sue', 'Smith', 'female', 20050610),
+    new Cyclist('Phil', 'Smith', 'male', 2003, 'July', 15),
+    new Cyclist('Sue', 'Smith', 'female', 2005, 'June', 10),
   ];
 
   constructor() { }

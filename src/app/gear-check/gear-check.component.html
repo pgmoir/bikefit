@@ -1,51 +1,28 @@
 <div class="row">
   <div class="col-sm-12">
     <h2>Gear Check</h2>
-    <p>This page allows you to enter details for the youth road cyclist and their bike. Based on the British Cycling road racing restrictions, it will give you recommendations on gearing limitations that have to be applied.</p>
+    <p>This page allows you to enter details for the youth road cyclist and their bike. Based on the British Cycling road racing
+      restrictions, it will give you recommendations on gearing limitations that have to be applied.</p>
     <p>These are just recommendations, and you should still manually check the roll out of the bicycle according to BC guidelines.</p>
   </div>
 </div>
 <div class="row">
   <div class="col-sm-6">
-    <h4>Cyclist details</h4>
-    <div class="form-group">
-      <label for="dateOfBirth">Date of birth (e.g. dd/mm/yyyy)</label>
-      <ng2-datepicker [options]="dobOptions" class="form-control" [(ngModel)]="dateOfBirth" required></ng2-datepicker>
-    </div>
-    <div class="form-group">
-      <label for="gender">Gender (e.g. male or female)</label>
-      <select [(ngModel)]="gender" class="form-control" required>
-        <option *ngFor="let g of genders" [ngValue]="g">{{g}}</option>
-      </select>
-    </div>
-    <hr>
-    <app-gear-check-cyclist></app-gear-check-cyclist>
-    <h4>Bike details</h4>
-    <div class="form-group">
-      <label for="wheelSize">Wheel size (e.g. 700x23)</label>
-      <select [(ngModel)]="wheelSize" class="form-control" required>
-        <option *ngFor="let ws of wheelSizes" [ngValue]="ws">{{ws}}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="largestChainRing">Teeth on largest front chain ring (e.g. 40)</label>
-      <select [(ngModel)]="largestChainRing" class="form-control" required>
-        <option *ngFor="let cr of chainRingSizes" [ngValue]="cr">{{cr}}</option>
-      </select>
-    </div>
+    <app-gear-check-cyclist [cyclist]="cyclist"></app-gear-check-cyclist>
+    <app-gear-check-bike [bike]="bike"></app-gear-check-bike>
+    <h4>Country to check</h4>
     <div class="form-group">
       <label for="engineCategory">Nationality (e.g. GB or NL or US or FR)</label>
       <select [(ngModel)]="engineCategory" class="form-control" required>
         <option *ngFor="let ec of engineCategories" [ngValue]="ec">{{ec}}</option>
       </select>
     </div>
-    <hr>
-    <app-gear-check-bike></app-gear-check-bike>
     <button class="btn btn-primary" (click)="checkGearing()">Check Gearing</button>
   </div>
   <div class="col-sm-6">
     <h4>Recommendations</h4>
-    <p>You have selected a wheel size of {{ wheelSize }} with a front chain ring size of {{ largestChainRing }} teeth for cyclist born on {{ dateOfBirth.formatted }} and riding according to {{ engineCategory }} regulations.</p>
+    <p>You have selected a wheel size of {{ wheelSize }} with a front chain ring size of {{ largestChainRing }} teeth for cyclist
+      born on and riding according to {{ engineCategory }} regulations.</p>
     <hr>
     <p>{{ recommendation }}</p>
     <app-gear-check-result></app-gear-check-result>
