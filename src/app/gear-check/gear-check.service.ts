@@ -3,7 +3,7 @@ import { Http, Headers, Response } from '@angular/http';
 import 'rxjs/Rx';
 
 import { GearOptionsModel } from './gear-options.model';
-import { UrlHelperService } from './url-helper.service';
+import { UrlHelperService } from './../shared/url-helper.service';
 
 @Injectable()
 

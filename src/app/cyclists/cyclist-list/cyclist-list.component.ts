@@ -1,5 +1,6 @@
-import { Cyclist } from './../../shared/cyclist.model';
 import { Component, OnInit } from '@angular/core';
+
+import { Cyclist } from './../../shared/models/cyclist.model';
 
 @Component({
   selector: 'app-cyclist-list',

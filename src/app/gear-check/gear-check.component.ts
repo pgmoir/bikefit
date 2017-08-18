@@ -1,13 +1,13 @@
-import { Bike } from './../shared/bike.model';
-import { Cyclist } from './../shared/cyclist.model';
+import { Bike } from './../shared/models/bike.model';
+import { Cyclist } from './../shared/models/cyclist.model';
 import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 
 import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 
-import { GearCheckModel } from './../shared/gear-check.model';
-import { GearOptionsModel } from './../shared/gear-options.model';
-import { GearCheckService } from './../shared/gear-check.service';
+import { GearCheckModel } from './gear-check.model';
+import { GearOptionsModel } from './gear-options.model';
+import { GearCheckService } from './gear-check.service';
 
 @Component({
   selector: 'app-gear-check',

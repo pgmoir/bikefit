@@ -1,19 +1,9 @@
 <div class="row">
-    <div class="col-xs-12">
-      <button class="btn btn-success">New Cyclist</button>
-    </div>
+  <div class="col-xs-10">
+    <app-cyclist-edit></app-cyclist-edit>
     <hr>
-    <div class="col-xs-12">
-        <a href="#" class="list-group-item clearfix" *ngFor="let cyclist of cyclists">
-          <div class="pull-left">
-            <h4 class="list-group-item-heading">{{ cyclist.firstname }}</h4>
-            <p class="list-group-item-text">{{ cyclist.lastname }}</p>
-          </div>
-          <span class="pull-right">
-            <img [src]="cyclist.imagePath" alt="{{ cyclist.name }}" class="img-responsive" style="max-height: 50px;">
-          </span>
-        </a>
-        <app-cyclist-item></app-cyclist-item>
-      </div>
+    <ul class="list-group">
+      <a class="list-group-item" style="cursor: pointer" *ngFor="let cyclist of cyclists" >{{ cyclist.firstname }} {{ cyclist.lastname }}</a>
+    </ul>
   </div>
-
+</div>

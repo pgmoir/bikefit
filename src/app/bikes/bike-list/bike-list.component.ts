@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Bike } from './../../shared/bike.model';
+import { Bike } from './../../shared/models/bike.model';
 
 @Component({
   selector: 'app-bike-list',

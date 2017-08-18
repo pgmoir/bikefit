@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { GearCheckComponent } from './gear-check/gear-check.component';
-import { GearCheckService } from './shared/gear-check.service';
+import { GearCheckService } from './gear-check/gear-check.service';
 import { UrlHelperService } from './shared/url-helper.service';
 import { DropDownDirective } from './shared/dropdown.directive';
 import { DatePickerModule } from 'ng2-datepicker';
@@ -21,8 +21,8 @@ import { BikeDetailComponent } from './bikes/bike-detail/bike-detail.component';
 import { BikeItemComponent } from './bikes/bike-list/bike-item/bike-item.component';
 import { CyclistsComponent } from './cyclists/cyclists.component';
 import { CyclistListComponent } from './cyclists/cyclist-list/cyclist-list.component';
-import { CyclistItemComponent } from './cyclists/cyclist-list/cyclist-item/cyclist-item.component';
 import { CyclistDetailComponent } from './cyclists/cyclist-detail/cyclist-detail.component';
+import { CyclistEditComponent } from './cyclists/cyclist-list/cyclist-edit/cyclist-edit.component';
 
 @NgModule({
   declarations: [
@@ -41,8 +41,8 @@ import { CyclistDetailComponent } from './cyclists/cyclist-detail/cyclist-detail
     BikeItemComponent,
     CyclistsComponent,
     CyclistListComponent,
-    CyclistItemComponent,
-    CyclistDetailComponent
+    CyclistDetailComponent,
+    CyclistEditComponent
   ],
   imports: [
     BrowserModule,

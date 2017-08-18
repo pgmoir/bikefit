@@ -1,5 +1,5 @@
-import { Cyclist } from './cyclist.model';
-import { Bike } from './bike.model';
+import { Cyclist } from './../shared/models/cyclist.model';
+import { Bike } from './../shared/models/bike.model';
 
 export class GearOptionsModel {
   // base initialisation properties
