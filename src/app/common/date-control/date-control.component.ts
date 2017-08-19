@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import _ from 'lodash';
 
 @Component({
@@ -11,6 +11,9 @@ export class DateControlComponent implements OnInit, OnChanges {
   @Input() day: number;
   @Input() month: string;
   @Input() year: number;
+
+  @Output() dateChanged = new EventEmitter<number>();
+
   valid = false;
 
   days: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
@@ -31,7 +34,6 @@ export class DateControlComponent implements OnInit, OnChanges {
   ngOnInit() { }
 
   ngOnChanges(changes) {
-    console.log(changes);
     this.onSelect();
   }
 
@@ -51,7 +53,10 @@ export class DateControlComponent implements OnInit, OnChanges {
     const maxDateValue = this.yearMax * 10000 + 3112;
 
     this.valid = dateValue >= minDateValue && dateValue < maxDateValue && this.isDate(year, month, day);
-    console.log('date is ' + dateValue + ' = ' + this.valid);
+
+    if (this.valid) {
+      this.dateChanged.emit(dateValue);
+    }
   }
 
   private isDate(year, month, day) {
@@ -60,5 +65,4 @@ export class DateControlComponent implements OnInit, OnChanges {
     const givenDate = '' + year + month + day;
     return (givenDate === convertedDate);
   }
-
 }

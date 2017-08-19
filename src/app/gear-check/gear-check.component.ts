@@ -27,8 +27,8 @@ export class GearCheckComponent implements OnInit {
   constructor(private gearCheckService: GearCheckService) {  }
 
   ngOnInit() {
-    this.cyclist = new Cyclist('', '', 'female', 19, 'March', 2005);
-    this.bike = new Bike('', '', '', '700c/29er', '23mm', 48);
+    this.cyclist = new Cyclist('', '', '', 0, '', 0);
+    this.bike = new Bike('', '', '','', '', 0);
     this.engineCategory = 'GB';
     this.recommendation = '';
   }

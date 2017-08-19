@@ -16,4 +16,8 @@ export class GearCheckCyclistComponent implements OnInit {
   ngOnInit() {
   }
 
+  onDateChanged(dateOfBirth: number) {
+    this.cyclist.dateOfBirth = dateOfBirth;
+  }
+
 }

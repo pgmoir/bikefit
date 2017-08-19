@@ -1,7 +1,7 @@
 <h4>Cyclist details</h4>
 <div class="form-group">
   <label for="dateOfBirth">Date of birth (e.g. dd/mm/yyyy)</label>
-  <app-date-control [day]="cyclist.dobDay" [month]="cyclist.dobMonth" [year]="cyclist.dobYear"></app-date-control>
+  <app-date-control [day]="cyclist.dobDay" [month]="cyclist.dobMonth" [year]="cyclist.dobYear" (dateChanged)="onDateChanged($event)"></app-date-control>
 </div>
 <div class="form-group">
   <label for="gender">Gender (e.g. male or female)</label>

@@ -5,6 +5,7 @@ export class Cyclist {
   public dobDay: number;
   public dobMonth: string;
   public dobYear: number;
+  public dateOfBirth: number;
 
   constructor(firstname: string, lastname: string, gender: string, dobDay: number, dobMonth: string, dobYear: number) {
     this.firstname = firstname;
@@ -13,10 +14,5 @@ export class Cyclist {
     this.dobDay = dobDay;
     this.dobMonth = dobMonth;
     this.dobYear = dobYear;
-  }
-
-  getDateOfBirth() {
-    const formattedDate = this.dobYear + this.dobMonth + this.dobDay;
-    return parseInt(formattedDate, 10);
   }
 }
