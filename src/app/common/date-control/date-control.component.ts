@@ -34,7 +34,7 @@ export class DateControlComponent implements OnInit, OnChanges {
   ngOnInit() { }
 
   ngOnChanges(changes) {
-    this.onSelect();
+    this.setDateIsValid();
   }
 
   onSelect() {
