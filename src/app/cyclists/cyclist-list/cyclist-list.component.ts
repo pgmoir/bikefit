@@ -18,4 +18,8 @@ export class CyclistListComponent implements OnInit {
   ngOnInit() {
   }
 
+  onCyclistAdded(cyclist: Cyclist) {
+    this.cyclists.push(cyclist);
+  }
+
 }

@@ -12,7 +12,7 @@ export class WheelSizeComponent implements OnInit, OnChanges {
 
   @Output() rimChanged = new EventEmitter<string>();
   @Output() tyreChanged = new EventEmitter<string>();
-  
+
   valid = false;
   dirty = false;
 
@@ -35,7 +35,7 @@ export class WheelSizeComponent implements OnInit, OnChanges {
   ngOnChanges(changes) {
     this.onSelect();
   }
-  
+
   onSelect() {
     this.setWheelSizeIsValid();
   }

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-10">
-    <app-cyclist-edit></app-cyclist-edit>
+    <app-cyclist-edit (cyclistAdded)="onCyclistAdded($event)"></app-cyclist-edit>
     <hr>
     <ul class="list-group">
       <a class="list-group-item" style="cursor: pointer" *ngFor="let cyclist of cyclists" >{{ cyclist.firstname }} {{ cyclist.lastname }}</a>
