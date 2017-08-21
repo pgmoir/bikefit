@@ -37,6 +37,7 @@ export class GearCheckComponent implements OnInit {
 
   checkGearing() {
     const options = new GearOptionsModel(this.cyclist, this.bike, this.engineCategory);
+    this.gearCheck = new GearCheckModel(options);
 
     console.log(options);
     this.gearCheckService.calculateRestriction(options)
@@ -44,7 +45,10 @@ export class GearCheckComponent implements OnInit {
         (data: GearCheckModel) => {
           this.gearCheck = data;
         },
-        (error) => console.log(error)
+        (error) => {
+          console.log(error);
+          this.gearCheck.validResult = false;
+        }
       );
   }
 }
