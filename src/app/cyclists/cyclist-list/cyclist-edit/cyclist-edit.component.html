@@ -2,13 +2,19 @@
   <div class="col-xs-12">
     <form>
       <div class="row">
-        <div class="col-sm-5 form-group">
+        <div class="col-sm-4 form-group">
           <label for="firstname">First Name</label>
           <input type="text" id="firstname" class="form-control" #firstnameInput>
         </div>
-        <div class="col-sm-5 form-group">
+        <div class="col-sm-4 form-group">
           <label for="lastname">Last Name</label>
           <input type="text" id="lastname" class="form-control" #lastnameInput>
+        </div>
+        <div class="col-sm-4 form-group">
+          <label for="gender">Gender</label>
+          <select class="form-control" #genderInput>
+            <option *ngFor="let g of genders" [ngValue]="g">{{g}}</option>
+          </select>
         </div>
       </div>
       <div class="row">

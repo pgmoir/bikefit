@@ -11,8 +11,11 @@ export class CyclistEditComponent implements OnInit {
 
   @ViewChild('firstnameInput') firstnameInputRef: ElementRef;
   @ViewChild('lastnameInput') lastnameInputRef: ElementRef;
+  @ViewChild('genderInput') genderInputRef: ElementRef;
 
   @Output() cyclistAdded = new EventEmitter<Cyclist>();
+
+  genders: string[] = ['male', 'female'];
 
   constructor() { }
 
@@ -22,7 +25,8 @@ export class CyclistEditComponent implements OnInit {
   onAddItem() {
     const firstname = this.firstnameInputRef.nativeElement.value;
     const lastname = this.lastnameInputRef.nativeElement.value;
-    const newCyclist = new Cyclist(firstname, lastname, '', 0, '', 0);
+    const gender = this.genderInputRef.nativeElement.value;
+    const newCyclist = new Cyclist(firstname, lastname, gender, 0, '', 0);
     this.cyclistAdded.emit(newCyclist);
   }
 

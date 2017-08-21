@@ -3,7 +3,7 @@
     <app-cyclist-edit (cyclistAdded)="onCyclistAdded($event)"></app-cyclist-edit>
     <hr>
     <ul class="list-group">
-      <a class="list-group-item" style="cursor: pointer" *ngFor="let cyclist of cyclists" >{{ cyclist.firstname }} {{ cyclist.lastname }}</a>
+      <a class="list-group-item" style="cursor: pointer" *ngFor="let cyclist of cyclists" >{{ cyclist.firstname }} {{ cyclist.lastname }} ({{ cyclist.gender }})</a>
     </ul>
   </div>
 </div>
