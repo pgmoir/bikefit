@@ -4,16 +4,7 @@
   </div>
   <hr>
   <div class="col-xs-12">
-      <a href="#" class="list-group-item clearfix" *ngFor="let bike of bikes">
-        <div class="pull-left">
-          <h4 class="list-group-item-heading">{{ bike.name }}</h4>
-          <p class="list-group-item-text">{{ bike.description }}</p>
-        </div>
-        <span class="pull-right">
-          <img [src]="bike.imagePath" alt="{{ bike.name }}" class="img-responsive" style="max-height: 50px;">
-        </span>
-      </a>
-      <app-bike-item></app-bike-item>
+      <app-bike-item *ngFor="let bikeEl of bikes" [bike]="bikeEl" (bikeSelected)="onBikeSelected(bikeEl)"></app-bike-item>
     </div>
 </div>
 
