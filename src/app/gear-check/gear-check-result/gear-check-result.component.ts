@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { GearCheckModel } from './../gear-check.model';
 
 @Component({
   selector: 'app-gear-check-result',
@@ -6,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./gear-check-result.component.css']
 })
 export class GearCheckResultComponent implements OnInit {
-  resultsSet = false;
+
+  @Input() result: GearCheckModel;
 
   constructor() { }
 
