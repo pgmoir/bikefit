@@ -15,6 +15,7 @@ export class DateControlComponent implements OnInit, OnChanges {
   @Output() dateChanged = new EventEmitter<number>();
 
   valid = false;
+  dirty = false;
 
   days: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
   months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -46,6 +47,8 @@ export class DateControlComponent implements OnInit, OnChanges {
     const year = this.year ? this.year : 0;
     const month = this.month ? this.months.indexOf(this.month) + 1 : 0;
     const day = this.day ? this.day : 0;
+
+    this.dirty = (day > 0 && month > 0 && year > 0);
 
     const dateValue = year * 10000 + month * 100 + day;
 

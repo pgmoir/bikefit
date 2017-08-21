@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+
+import { Bike } from './../../../shared/models/bike.model';
 
 @Component({
   selector: 'app-bike-item',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BikeItemComponent implements OnInit {
 
+  @Input() bike: Bike;
+  @Output() bikeSelected = new EventEmitter<void>();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onSelected() {
+    this.bikeSelected.emit();
   }
 
 }

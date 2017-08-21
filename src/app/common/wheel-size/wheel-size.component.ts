@@ -14,6 +14,7 @@ export class WheelSizeComponent implements OnInit, OnChanges {
   @Output() tyreChanged = new EventEmitter<string>();
   
   valid = false;
+  dirty = false;
 
   rims: string[] = [
     '28inch', '27inch', '700c/29er', '650b/27.5', '650c', '26inch mtb', '24inch S5', '24inch E6', 
@@ -52,6 +53,7 @@ export class WheelSizeComponent implements OnInit, OnChanges {
   private setWheelSizeIsValid() {
     const rimValid = this.rim && this.rim.length > 0;
     const tyreValid = this.tyre && this.tyre.length > 0;
+    this.dirty = rimValid || tyreValid;
     this.valid = rimValid && tyreValid;
   }
 }

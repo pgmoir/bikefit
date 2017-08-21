@@ -1,8 +1,8 @@
-<div class="input-group" [ngClass]="{ 'has-error': !valid }">
-    <select [(ngModel)]="rim" class="form-control" required (change)="onRimSelected()">
+<div class="input-group" [ngClass]="{ 'has-error': !valid && dirty }">
+    <select [(ngModel)]="rim" class="form-control" (change)="onRimSelected()">
       <option *ngFor="let r of rims" [ngValue]="r">{{r}}</option>
     </select>
-    <select [(ngModel)]="tyre" class="form-control" required (change)="onTyreSelected()">
+    <select [(ngModel)]="tyre" class="form-control" (change)="onTyreSelected()">
       <option *ngFor="let t of tyres" [ngValue]="t">{{t}}</option>
     </select>
   </div>

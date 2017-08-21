@@ -13,7 +13,7 @@
     <h4>Country to check</h4>
     <div class="form-group">
       <label for="engineCategory">Nationality (e.g. GB or NL or US or FR)</label>
-      <select [(ngModel)]="engineCategory" class="form-control" required>
+      <select [(ngModel)]="engineCategory" class="form-control">
         <option *ngFor="let ec of engineCategories" [ngValue]="ec">{{ec}}</option>
       </select>
     </div>

@@ -1,11 +1,11 @@
-<div class="input-group" [ngClass]="{ 'has-error': !valid }">
-  <select [(ngModel)]="day" class="form-control" required (change)="onSelect()">
+<div class="input-group" [ngClass]="{ 'has-error': !valid && dirty }">
+  <select [(ngModel)]="day" class="form-control" (change)="onSelect()">
     <option *ngFor="let dd of days" [ngValue]="dd">{{dd}}</option>
   </select>
-  <select [(ngModel)]="month" class="form-control" required (change)="onSelect()">
+  <select [(ngModel)]="month" class="form-control" (change)="onSelect()">
     <option *ngFor="let mm of months" [ngValue]="mm">{{mm}}</option>
   </select>
-  <select [(ngModel)]="year" class="form-control" required (change)="onSelect()">
+  <select [(ngModel)]="year" class="form-control" (change)="onSelect()">
     <option *ngFor="let yy of years" [ngValue]="yy">{{yy}}</option>
   </select>
 </div>
