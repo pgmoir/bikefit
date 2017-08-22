@@ -1,6 +1,7 @@
-import { Component, ElementRef, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import { Cyclist } from '../../../shared/models/cyclist.model';
+import { CyclistService } from '../../cyclist.service';
 
 @Component({
   selector: 'app-cyclist-edit',
@@ -13,11 +14,9 @@ export class CyclistEditComponent implements OnInit {
   @ViewChild('lastnameInput') lastnameInputRef: ElementRef;
   @ViewChild('genderInput') genderInputRef: ElementRef;
 
-  @Output() cyclistAdded = new EventEmitter<Cyclist>();
-
   genders: string[] = ['male', 'female'];
 
-  constructor() { }
+  constructor(private cyclistService: CyclistService) { }
 
   ngOnInit() {
   }
@@ -27,7 +26,7 @@ export class CyclistEditComponent implements OnInit {
     const lastname = this.lastnameInputRef.nativeElement.value;
     const gender = this.genderInputRef.nativeElement.value;
     const newCyclist = new Cyclist(firstname, lastname, gender, 0, '', 0);
-    this.cyclistAdded.emit(newCyclist);
+    this.cyclistService.addCyclist(newCyclist);
   }
 
 }

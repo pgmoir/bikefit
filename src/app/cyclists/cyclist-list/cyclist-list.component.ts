@@ -1,3 +1,4 @@
+import { CyclistService } from '../cyclist.service';
 import { Component, OnInit } from '@angular/core';
 
 import { Cyclist } from './../../shared/models/cyclist.model';
@@ -8,18 +9,17 @@ import { Cyclist } from './../../shared/models/cyclist.model';
   styleUrls: ['./cyclist-list.component.css']
 })
 export class CyclistListComponent implements OnInit {
-  cyclists: Cyclist[] = [
-    new Cyclist('Phil', 'Smith', 'male', 2003, 'July', 15),
-    new Cyclist('Sue', 'Smith', 'female', 2005, 'June', 10),
-  ];
+  cyclists: Cyclist[];
 
-  constructor() { }
+  constructor(private cyclistService: CyclistService) { }
 
   ngOnInit() {
-  }
-
-  onCyclistAdded(cyclist: Cyclist) {
-    this.cyclists.push(cyclist);
+    this.cyclists = this.cyclistService.getCyclists();
+    this.cyclistService.cyclistsChanged.subscribe(
+      (cyclists: Cyclist[]) => {
+        this.cyclists = cyclists;
+      }
+    );
   }
 
 }

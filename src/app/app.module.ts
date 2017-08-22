@@ -1,14 +1,7 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 
-import { AppComponent } from './app.component';
 import { GearCheckComponent } from './gear-check/gear-check.component';
-import { GearCheckService } from './gear-check/gear-check.service';
-import { UrlHelperService } from './shared/url-helper.service';
 import { DropDownDirective } from './shared/directives/dropdown.directive';
-import { DatePickerModule } from 'ng2-datepicker';
 import { GearCheckResultComponent } from './gear-check/gear-check-result/gear-check-result.component';
 import { GearCheckCyclistComponent } from './gear-check/gear-check-cyclist/gear-check-cyclist.component';
 import { GearCheckBikeComponent } from './gear-check/gear-check-bike/gear-check-bike.component';
@@ -28,6 +21,16 @@ import { BetterHighlightDirective } from './shared/directives/better-hightlight.
 import { AnotherHighlightDirective } from './shared/directives/another-highlight.directive';
 import { FourthHighlightDirective } from './shared/directives/fourth-highlight.directive';
 import { UnlessDirective } from './shared/directives/unless.directive';
+
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+
+import { GearCheckService } from './gear-check/gear-check.service';
+import { UrlHelperService } from './shared/url-helper.service';
+import { CyclistService } from './cyclists/cyclist.service';
+
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
@@ -57,10 +60,9 @@ import { UnlessDirective } from './shared/directives/unless.directive';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
-    DatePickerModule
+    HttpModule
   ],
-  providers: [GearCheckService, UrlHelperService],
+  providers: [GearCheckService, UrlHelperService, CyclistService],
   bootstrap: [AppComponent]
 })
 

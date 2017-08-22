@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { CyclistService } from './cyclist.service';
+
 @Component({
   selector: 'app-cyclists',
   templateUrl: './cyclists.component.html',

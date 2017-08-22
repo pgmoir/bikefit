@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { BikeService } from '../../bike.service';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Bike } from './../../../shared/models/bike.model';
 
@@ -10,15 +11,14 @@ import { Bike } from './../../../shared/models/bike.model';
 export class BikeItemComponent implements OnInit {
 
   @Input() bike: Bike;
-  @Output() bikeSelected = new EventEmitter<void>();
 
-  constructor() { }
+  constructor(private bikeService: BikeService) { }
 
   ngOnInit() {
   }
 
   onSelected() {
-    this.bikeSelected.emit();
+    this.bikeService.bikeSelected.emit(this.bike);
   }
 
 }
