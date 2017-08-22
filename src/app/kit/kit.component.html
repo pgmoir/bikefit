@@ -1,21 +1,27 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-        <h3>Demonstration using ngClass and ngStyle</h3>
-        <button class="btn btn-primary" (click)="onlyShirts = !onlyShirts">Toggle showing shirts and pants</button>
+      <h3>Demonstration using ngClass and ngStyle</h3>
+      <button class="btn btn-primary" (click)="onlyShirts = !onlyShirts">Toggle showing shirts and pants</button>
       <br><br>
       <ul class="list-group">
         <div *ngIf="onlyShirts">
-          <li class="list-group-item" *ngFor="let shirt of shirts"
-          [ngClass]="{shirt: shirt.indexOf('shirt') >= 0}"
-          [ngStyle]="{backgroundColor: shirt.indexOf('shirt') >= 0 ? 'yellow' : 'transparent'}">{{shirt}}</li>
+          <li class="list-group-item" *ngFor="let shirt of shirts" [ngClass]="{shirt: shirt.indexOf('shirt') >= 0}" [ngStyle]="{backgroundColor: shirt.indexOf('shirt') >= 0 ? 'yellow' : 'transparent'}">{{shirt}}</li>
         </div>
         <div *ngIf="!onlyShirts">
-          <li class="list-group-item" *ngFor="let pant of pants"
-          [ngClass]="{shirt: pant.indexOf('shirt') >= 0}"
-          [ngStyle]="{backgroundColor: pant.indexOf('shirt') >= 0 ? 'yellow' : 'transparent'}">{{pant}}</li>
+          <li class="list-group-item" *ngFor="let pant of pants" [ngClass]="{shirt: pant.indexOf('shirt') >= 0}" [ngStyle]="{backgroundColor: pant.indexOf('shirt') >= 0 ? 'yellow' : 'transparent'}">{{pant}}</li>
         </div>
-      </ul>
+        <hr>
+        <ng-template [ngIf]="!onlyShirts">
+          <div>
+            <li class="list-group-item" *ngFor="let pant of pants" [ngClass]="{shirt: pant.indexOf('shirt') >= 0}" [ngStyle]="{backgroundColor: pant.indexOf('shirt') >= 0 ? 'yellow' : 'transparent'}">{{pant}}</li>
+          </div>
+        </ng-template>
+        <hr>
+        <div *appUnless="onlyShirts">
+          <li class="list-group-item" *ngFor="let pant of pants" [ngClass]="{shirt: pant.indexOf('shirt') >= 0}" [ngStyle]="{backgroundColor: pant.indexOf('shirt') >= 0 ? 'yellow' : 'transparent'}">{{pant}}</li>
+        </div>
+        <hr> </ul>
     </div>
   </div>
   <div class="row">
@@ -23,6 +29,15 @@
       <h3>Demonstration using Directives</h3>
       <p appBasicHighlight>Style me with basic directive - not good practice to directly access elements</p>
       <p appBetterHighlight>Style me with better directive - using Renderer2</p>
+      <p appAnotherHighlight [highlightBackgroundColor]="'brown'" [highlightColor]="'orange'">Style me with another directive - using HostBinding - custom overriding colours</p>
+      <p [appFourthHighlight]="'green'">Style me with another directive - using HostBinding - only one input color</p>
+      <p appAnotherHighlight highlightBackgroundColor="olive" highlightColor="maroon">Style me with another directive - using HostBinding - properties passed as string with [] and ''</p>
     </div>
+    <div [ngSwitch]="value">
+        <p *ngSwitchCase="5">Value is 5</p>
+        <p *ngSwitchCase="10">Value is 10</p>
+        <p *ngSwitchCase="15">Value is 15</p>
+        <p *ngSwitchDefault>Value is something else</p>
+      </div>
   </div>
 </div>

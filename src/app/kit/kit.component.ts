@@ -9,6 +9,7 @@ export class KitComponent implements OnInit {
 
   pants: string[] = ['rapha black pants', 'blyth white pants', 'movistar blue pants'];
   shirts: string[] = ['orica blue shirt', 'sky white shirt', 'yellow jersey shirt'];
+  value = 10;
 
   constructor() { }
 

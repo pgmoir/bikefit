@@ -25,6 +25,9 @@ import { CyclistEditComponent } from './cyclists/cyclist-list/cyclist-edit/cycli
 import { KitComponent } from './kit/kit.component';
 import { BasicHighlightDirective } from './shared/directives/basic-hightlight.directive';
 import { BetterHighlightDirective } from './shared/directives/better-hightlight.directive';
+import { AnotherHighlightDirective } from './shared/directives/another-highlight.directive';
+import { FourthHighlightDirective } from './shared/directives/fourth-highlight.directive';
+import { UnlessDirective } from './shared/directives/unless.directive';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import { BetterHighlightDirective } from './shared/directives/better-hightlight.
     CyclistEditComponent,
     KitComponent,
     BasicHighlightDirective,
-    BetterHighlightDirective
+    BetterHighlightDirective,
+    AnotherHighlightDirective,
+    FourthHighlightDirective,
+    UnlessDirective
   ],
   imports: [
     BrowserModule,
