@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+        <h3>Demonstration using ngClass and ngStyle</h3>
+        <button class="btn btn-primary" (click)="onlyShirts = !onlyShirts">Toggle showing shirts and pants</button>
+      <br><br>
+      <ul class="list-group">
+        <div *ngIf="onlyShirts">
+          <li class="list-group-item" *ngFor="let shirt of shirts"
+          [ngClass]="{shirt: shirt.indexOf('shirt') >= 0}"
+          [ngStyle]="{backgroundColor: shirt.indexOf('shirt') >= 0 ? 'yellow' : 'transparent'}">{{shirt}}</li>
+        </div>
+        <div *ngIf="!onlyShirts">
+          <li class="list-group-item" *ngFor="let pant of pants"
+          [ngClass]="{shirt: pant.indexOf('shirt') >= 0}"
+          [ngStyle]="{backgroundColor: pant.indexOf('shirt') >= 0 ? 'yellow' : 'transparent'}">{{pant}}</li>
+        </div>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h3>Demonstration using Directives</h3>
+      <p appBasicHighlight>Style me with basic directive - not good practice to directly access elements</p>
+      <p appBetterHighlight>Style me with better directive - using Renderer2</p>
+    </div>
+  </div>
+</div>
