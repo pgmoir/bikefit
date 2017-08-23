@@ -1,7 +1,8 @@
-import { BikeService } from '../bike.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 
 import { Bike } from '../../shared/models/bike.model';
+import { BikeService } from '../bike.service';
 
 @Component({
   selector: 'app-bike-detail',
@@ -9,12 +10,19 @@ import { Bike } from '../../shared/models/bike.model';
   styleUrls: ['./bike-detail.component.css']
 })
 export class BikeDetailComponent implements OnInit {
+  bike: Bike;
+  id: number;
 
-  @Input() bike: Bike;
-
-  constructor(private bikeService: BikeService) { }
+  constructor(private bikeService: BikeService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.params
+      .subscribe(
+        (params: Params) => {
+          this.id = +params['id'];
+          this.bike = this.bikeService.getBike(this.id);
+        }
+      );
   }
 
   onAddToCyclists() {

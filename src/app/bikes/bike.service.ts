@@ -22,6 +22,10 @@ export class BikeService {
       return this.bikes.slice();
   }
 
+  getBike(index: number) {
+    return this.bikes[index];
+  }
+
   addUsersToCyclists(users: Cyclist[]) {
     this.cyclistService.addCyclists(users);
   }

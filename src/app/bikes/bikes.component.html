@@ -1,14 +1,15 @@
 <div class="row">
+  <div class="col-sm-12">
+    <h2>Bikes</h2>
+    <p>This section allows you to store details on all the bikes you own, and link one or more cyclists to each bike.</p>
+  </div>
+</div>
+<div class="row">
   <div class="col-md-5">
     <app-bike-list></app-bike-list>
     <hr>
   </div>
   <div class="col-md-7">
-    <app-bike-detail *ngIf="selectedBike; else infoText" [bike]="selectedBike"></app-bike-detail>
-    <ng-template #infoText>
-      <div class="alert alert-info">
-          <p>Please select a bike</p>
-      </div>
-    </ng-template>
+    <router-outlet></router-outlet>
   </div>
 </div>

@@ -37,6 +37,8 @@ import { UrlHelperService } from './shared/url-helper.service';
 import { CyclistService } from './cyclists/cyclist.service';
 
 import { AppComponent } from './app.component';
+import { BikeStartComponent } from './bikes/bike-start/bike-start.component';
+import { BikeEditComponent } from './bikes/bike-edit/bike-edit.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,9 @@ import { AppComponent } from './app.component';
     FourthHighlightDirective,
     UnlessDirective,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    BikeStartComponent,
+    BikeEditComponent
   ],
   imports: [
     BrowserModule,

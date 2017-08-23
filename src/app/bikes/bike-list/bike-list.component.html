@@ -4,7 +4,6 @@
   </div>
   <hr>
   <div class="col-xs-12">
-      <app-bike-item *ngFor="let bikeEl of bikes" [bike]="bikeEl"></app-bike-item>
-    </div>
+    <app-bike-item *ngFor="let bikeEl of bikes; let i = index" [bike]="bikeEl" [index]="i"></app-bike-item>
+  </div>
 </div>
-

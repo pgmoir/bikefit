@@ -1,5 +1,4 @@
-import { BikeService } from '../../bike.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { Bike } from './../../../shared/models/bike.model';
 
@@ -8,17 +7,8 @@ import { Bike } from './../../../shared/models/bike.model';
   templateUrl: './bike-item.component.html',
   styleUrls: ['./bike-item.component.css']
 })
-export class BikeItemComponent implements OnInit {
-
+export class BikeItemComponent {
   @Input() bike: Bike;
-
-  constructor(private bikeService: BikeService) { }
-
-  ngOnInit() {
-  }
-
-  onSelected() {
-    this.bikeService.bikeSelected.emit(this.bike);
-  }
-
+  @Input() index: number;
+  
 }
