@@ -1,7 +1,13 @@
+import { AuthGuard } from './shared/auth-guard.service';
+import { AuthService } from './shared/auth.service';
 import { NgModule } from '@angular/core';
 
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { AppRoutingModule } from './app-routing.module';
+
 import { GearCheckComponent } from './gear-check/gear-check.component';
-import { DropDownDirective } from './shared/directives/dropdown.directive';
 import { GearCheckResultComponent } from './gear-check/gear-check-result/gear-check-result.component';
 import { GearCheckCyclistComponent } from './gear-check/gear-check-cyclist/gear-check-cyclist.component';
 import { GearCheckBikeComponent } from './gear-check/gear-check-bike/gear-check-bike.component';
@@ -16,15 +22,15 @@ import { CyclistsComponent } from './cyclists/cyclists.component';
 import { CyclistListComponent } from './cyclists/cyclist-list/cyclist-list.component';
 import { CyclistEditComponent } from './cyclists/cyclist-list/cyclist-edit/cyclist-edit.component';
 import { KitComponent } from './kit/kit.component';
+import { HomeComponent } from './home/home.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+
+import { DropDownDirective } from './shared/directives/dropdown.directive';
 import { BasicHighlightDirective } from './shared/directives/basic-hightlight.directive';
 import { BetterHighlightDirective } from './shared/directives/better-hightlight.directive';
 import { AnotherHighlightDirective } from './shared/directives/another-highlight.directive';
 import { FourthHighlightDirective } from './shared/directives/fourth-highlight.directive';
 import { UnlessDirective } from './shared/directives/unless.directive';
-
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 
 import { GearCheckService } from './gear-check/gear-check.service';
 import { UrlHelperService } from './shared/url-helper.service';
@@ -55,14 +61,17 @@ import { AppComponent } from './app.component';
     BetterHighlightDirective,
     AnotherHighlightDirective,
     FourthHighlightDirective,
-    UnlessDirective
+    UnlessDirective,
+    HomeComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule
   ],
-  providers: [GearCheckService, UrlHelperService, CyclistService],
+  providers: [GearCheckService, UrlHelperService, CyclistService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 
