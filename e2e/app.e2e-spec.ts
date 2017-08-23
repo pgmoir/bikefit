@@ -1,10 +1,10 @@
-import { BikefitPage } from './app.po';
+import { GearcheckPage } from './app.po';
 
-describe('bikefit App', () => {
-  let page: BikefitPage;
+describe('gearcheck App', () => {
+  let page: GearcheckPage;
 
   beforeEach(() => {
-    page = new BikefitPage();
+    page = new GearcheckPage();
   });
 
   it('should display welcome message', () => {

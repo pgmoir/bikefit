@@ -1,6 +1,6 @@
 import { browser, by, element } from 'protractor';
 
-export class BikefitPage {
+export class GearcheckPage {
   navigateTo() {
     return browser.get('/');
   }
