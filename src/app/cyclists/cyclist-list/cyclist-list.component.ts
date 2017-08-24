@@ -1,25 +1,30 @@
-import { CyclistService } from '../cyclist.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
 import { Cyclist } from './../../shared/models/cyclist.model';
+import { CyclistService } from '../cyclist.service';
 
 @Component({
   selector: 'app-cyclist-list',
   templateUrl: './cyclist-list.component.html',
   styleUrls: ['./cyclist-list.component.css']
 })
-export class CyclistListComponent implements OnInit {
+export class CyclistListComponent implements OnInit, OnDestroy {
   cyclists: Cyclist[];
+  private cyclistsChangedSub: Subscription;
 
   constructor(private cyclistService: CyclistService) { }
 
   ngOnInit() {
     this.cyclists = this.cyclistService.getCyclists();
-    this.cyclistService.cyclistsChanged.subscribe(
+    this.cyclistsChangedSub = this.cyclistService.cyclistsChanged.subscribe(
       (cyclists: Cyclist[]) => {
         this.cyclists = cyclists;
       }
     );
   }
 
+  ngOnDestroy() {
+    this.cyclistsChangedSub.unsubscribe();
+  }
 }

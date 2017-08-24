@@ -1,8 +1,9 @@
-import { EventEmitter, Output } from '@angular/core';
 import { Cyclist } from './../shared/models/cyclist.model';
 
+import { Subject } from 'rxjs/Subject';
+
 export class CyclistService {
-    @Output() cyclistsChanged = new EventEmitter<Cyclist[]>();
+    cyclistsChanged = new Subject<Cyclist[]>();
 
     private cyclists: Cyclist[] = [
         new Cyclist('Phil', 'Smith', 'male', 2003, 'July', 15),
@@ -15,11 +16,11 @@ export class CyclistService {
 
     addCyclist(cyclist: Cyclist) {
         this.cyclists.push(cyclist);
-        this.cyclistsChanged.emit(this.cyclists.slice());
+        this.cyclistsChanged.next(this.cyclists.slice());
     }
 
     addCyclists(cyclists: Cyclist[]) {
         this.cyclists.push(...cyclists);
-        this.cyclistsChanged.emit(this.cyclists.slice());
+        this.cyclistsChanged.next(this.cyclists.slice());
     }
 }

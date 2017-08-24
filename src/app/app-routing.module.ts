@@ -19,9 +19,9 @@ const appRoutes: Routes = [
   { path: 'gear-check2', component: GearCheck2Component },
   { path: 'bikes', component: BikesComponent, children: [
     { path: '', component: BikeStartComponent },
-    { path: ':id', component: BikeDetailComponent },
     { path: 'new', component: BikeEditComponent },
-    { path: ':id/edit', component: BikeDetailComponent }
+    { path: ':id', component: BikeDetailComponent },
+    { path: ':id/edit', component: BikeEditComponent }
   ] },
   { path: 'cyclists', component: CyclistsComponent },
   { path: 'kit', component: KitComponent },

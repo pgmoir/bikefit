@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Bike } from './../shared/models/bike.model';
 import { BikeService } from './bike.service';
 
 @Component({
@@ -10,17 +9,10 @@ import { BikeService } from './bike.service';
   providers: [BikeService]
 })
 export class BikesComponent implements OnInit {
-  selectedBike: Bike;
 
-  constructor(private bikeService: BikeService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.bikeService.bikeSelected
-      .subscribe(
-        (bike: Bike) => {
-          this.selectedBike = bike;
-        }
-      );
   }
 
 }
