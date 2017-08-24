@@ -3,7 +3,7 @@ import { AuthService } from './shared/auth.service';
 import { NgModule } from '@angular/core';
 
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -39,6 +39,7 @@ import { CyclistService } from './cyclists/cyclist.service';
 import { AppComponent } from './app.component';
 import { BikeStartComponent } from './bikes/bike-start/bike-start.component';
 import { BikeEditComponent } from './bikes/bike-edit/bike-edit.component';
+import { GearCheck2Component } from './gear-check2/gear-check2.component';
 
 @NgModule({
   declarations: [
@@ -67,11 +68,13 @@ import { BikeEditComponent } from './bikes/bike-edit/bike-edit.component';
     HomeComponent,
     NotFoundComponent,
     BikeStartComponent,
-    BikeEditComponent
+    BikeEditComponent,
+    GearCheck2Component
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     AppRoutingModule
   ],

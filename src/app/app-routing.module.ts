@@ -1,3 +1,4 @@
+import { GearCheck2Component } from './gear-check2/gear-check2.component';
 import { BikeEditComponent } from './bikes/bike-edit/bike-edit.component';
 import { BikeDetailComponent } from './bikes/bike-detail/bike-detail.component';
 import { BikeStartComponent } from './bikes/bike-start/bike-start.component';
@@ -15,6 +16,7 @@ import { GearCheckComponent } from './gear-check/gear-check.component';
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'gear-check', component: GearCheckComponent },
+  { path: 'gear-check2', component: GearCheck2Component },
   { path: 'bikes', component: BikesComponent, children: [
     { path: '', component: BikeStartComponent },
     { path: ':id', component: BikeDetailComponent },
