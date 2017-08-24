@@ -12,7 +12,17 @@
       <h4>Cyclist details</h4>
       <div class="form-group">
         <label for="dateOfBirth">Date of birth (e.g. dd/mm/yyyy)</label>
-        <!-- <app-date-control [day]="cyclist.dobDay" [month]="cyclist.dobMonth" [year]="cyclist.dobYear" (dateChanged)="onDateChanged($event)"></app-date-control> -->
+        <div class="input-group">
+          <select id="day" class="form-control" (change)="onSelect()">
+              <option *ngFor="let dd of days">{{dd}}</option>
+            </select>
+          <select [(ngModel)]="month" class="form-control" (change)="onSelect()">
+              <option *ngFor="let mm of months" [ngValue]="mm">{{mm}}</option>
+            </select>
+          <select [(ngModel)]="year" class="form-control" (change)="onSelect()">
+              <option *ngFor="let yy of years" [ngValue]="yy">{{yy}}</option>
+            </select>
+        </div>
       </div>
       <div class="form-group">
         <label for="gender">Gender (e.g. male or female)</label>
@@ -32,7 +42,7 @@
           <option *ngFor="let cr of chainRingSizes; let i = index">{{cr}}</option>
         </select>
       </div>
-      <hr>      
+      <hr>
       <h4>Country to check</h4>
       <div class="form-group">
         <label for="engineCategory">Nationality (e.g. GB or NL or US or FR)</label>
