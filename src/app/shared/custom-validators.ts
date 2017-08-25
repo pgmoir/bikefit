@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 
 export class CustomValidators {
   static invalidDay(control: FormControl): {[s: string]: boolean} {
-    if (control.value > 30) {
+    if (control.value > 25) {
       return {'invalidDayOfMonth': true};
     }
     return null;
@@ -14,7 +14,7 @@ export class CustomValidators {
     const promise = new Promise((resolve, reject) => {
       setTimeout(() => {
         console.log('checking');
-        if (control.value > 31) {
+        if (control.value > 29) {
           console.log('failed');
           resolve({'invalidDayOfMonthAsync': true});
         } else {

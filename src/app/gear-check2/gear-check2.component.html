@@ -9,53 +9,58 @@
 <div class="row">
   <div class="col-sm-6">
     <form [formGroup]="gearCheckForm" (ngSubmit)="checkGearing()">
-      <h4>Cyclist details</h4>
-      <div class="form-group">
-        <label for="dateOfBirth">Date of birth (e.g. dd/mm/yyyy)</label>
-        <div class="input-group">
-          <select id="day" class="form-control" formControlName="day">
+      <div formGroupName="cyclist">
+        <h4>Cyclist details</h4>
+        <div class="form-group" formGroupName="dateOfBirth">
+          <label for="dateOfBirth">Date of birth (e.g. dd/mm/yyyy)</label>
+          <div class="input-group">
+            <select id="day" class="form-control" formControlName="day">
               <option *ngFor="let d of days" [value]="d">{{d}}</option>
             </select>
-          <select id="month" class="form-control" formControlName="month">
+            <select id="month" class="form-control" formControlName="month">
               <option *ngFor="let m of months" [value]="m">{{m}}</option>
             </select>
-          <select id="year" class="form-control" formControlName="year">
+            <select id="year" class="form-control" formControlName="year">
               <option *ngFor="let y of years" [value]="y">{{y}}</option>
             </select>
+          </div>
+          <span class="help-block">A valid date of birth must be entered</span>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="gender">Gender (e.g. male or female)</label>
-        <select id="gender" class="form-control" formControlName="gender">
-        <option *ngFor="let g of genders" [value]="g">{{g}}</option>
-      </select>
+        <div class="form-group">
+          <label for="gender">Gender (e.g. male or female)</label>
+          <select id="gender" class="form-control" formControlName="gender">
+            <option *ngFor="let g of genders" [value]="g">{{g}}</option>
+          </select>
+        </div>
       </div>
       <hr>
-      <h4>Bike details</h4>
-      <div class="form-group">
-        <label for="wheelSize">Wheel size (e.g. 700x23)</label>
-        <div class="input-group">
-          <select id="rim" class="form-control" formControlName="rim">
-            <option *ngFor="let r of rims" [value]="r">{{r}}</option>
-          </select>
-          <select id="tyre" class="form-control" formControlName="tyre">
-            <option *ngFor="let t of tyres" [value]="t">{{t}}</option>
+      <div formGroupName="bike">
+        <h4>Bike details</h4>
+        <div class="form-group">
+          <label for="wheelSize">Wheel size (e.g. 700x23)</label>
+          <div class="input-group" formGroupName="wheelSize">
+            <select id="rim" class="form-control" formControlName="rim">
+              <option *ngFor="let r of rims" [value]="r">{{r}}</option>
+            </select>
+            <select id="tyre" class="form-control" formControlName="tyre">
+              <option *ngFor="let t of tyres" [value]="t">{{t}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="chainRing">Teeth on largest front chain ring (e.g. 40)</label>
+          <select id="chainRing" class="form-control" formControlName="chainRing">
+            <option *ngFor="let c of chainRings" [value]="c">{{c}}</option>
           </select>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="chainRing">Teeth on largest front chain ring (e.g. 40)</label>
-        <select id="chainRing" class="form-control" formControlName="chainRing">
-          <option *ngFor="let c of chainRings" [value]="c">{{c}}</option>
-        </select>
       </div>
       <hr>
       <h4>Country to check</h4>
       <div class="form-group">
         <label for="engine">Nationality (e.g. GB or NL or US or FR)</label>
         <select id="engine" class="form-control" formControlName="engine">
-        <option *ngFor="let e of engines" [value]="e">{{e}}</option>
-      </select>
+          <option *ngFor="let e of engines" [value]="e">{{e}}</option>
+        </select>
       </div>
       <button class="btn btn-primary" type="submit">Check Gearing</button>
     </form>
