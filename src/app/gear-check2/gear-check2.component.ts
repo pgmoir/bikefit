@@ -87,11 +87,17 @@ export class GearCheck2Component implements OnInit {
 
   private getGearOptionsModel() {
     const form = this.gearCheckForm.value;
-    const options = new GearOptionsModel(
-      new Cyclist('', '', form.cyclist.gender, form.cyclist.dateOfBirth.day, form.cyclist.dateOfBirth.month, form.cyclist.dateOfBirth.year),
-      new Bike('', '', '', form.bike.wheelSize.rim, form.bike.wheelSize.tyre, form.bike.chainRing, []),
-      form.engine);
-    options.dateOfBirth = 20030605;
+    const cyclist = new Cyclist('', '', form.cyclist.gender, +form.cyclist.dateOfBirth.day, form.cyclist.dateOfBirth.month, +form.cyclist.dateOfBirth.year);
+    const bike = new Bike('', '', '', form.bike.wheelSize.rim, form.bike.wheelSize.tyre, +form.bike.chainRing, []);
+    const options = new GearOptionsModel(cyclist, bike, form.engine);
+    options.dateOfBirth = +this.getDateOfBirth(cyclist);
     return options;
+  }
+
+  private getDateOfBirth(cyclist: Cyclist) {
+    const year = cyclist.dobYear;
+    const month = this.months.indexOf( cyclist.dobMonth) + 1;
+    const day = cyclist.dobDay;
+    return year * 10000 + month * 100 + day;
   }
 }
