@@ -8,49 +8,56 @@
 </div>
 <div class="row">
   <div class="col-sm-6">
-    <form>
+    <form [formGroup]="gearCheckForm" (ngSubmit)="checkGearing()">
       <h4>Cyclist details</h4>
       <div class="form-group">
         <label for="dateOfBirth">Date of birth (e.g. dd/mm/yyyy)</label>
         <div class="input-group">
-          <select id="day" class="form-control" (change)="onSelect()">
-              <option *ngFor="let dd of days">{{dd}}</option>
+          <select id="day" class="form-control" formControlName="day">
+              <option *ngFor="let d of days" [value]="d">{{d}}</option>
             </select>
-          <select [(ngModel)]="month" class="form-control" (change)="onSelect()">
-              <option *ngFor="let mm of months" [ngValue]="mm">{{mm}}</option>
+          <select id="month" class="form-control" formControlName="month">
+              <option *ngFor="let m of months" [value]="m">{{m}}</option>
             </select>
-          <select [(ngModel)]="year" class="form-control" (change)="onSelect()">
-              <option *ngFor="let yy of years" [ngValue]="yy">{{yy}}</option>
+          <select id="year" class="form-control" formControlName="year">
+              <option *ngFor="let y of years" [value]="y">{{y}}</option>
             </select>
         </div>
       </div>
       <div class="form-group">
         <label for="gender">Gender (e.g. male or female)</label>
-        <select id="cyclist.gender" class="form-control">
-        <option *ngFor="let g of genders; let i = index">{{g}}</option>
+        <select id="gender" class="form-control" formControlName="gender">
+        <option *ngFor="let g of genders" [value]="g">{{g}}</option>
       </select>
       </div>
       <hr>
       <h4>Bike details</h4>
       <div class="form-group">
         <label for="wheelSize">Wheel size (e.g. 700x23)</label>
-        <!-- <app-wheel-size [rim]="bike.rim" [tyre]="bike.tyre" (rimChanged)="onRimChanged($event)" (tyreChanged)="onTyreChanged($event)"></app-wheel-size> -->
+        <div class="input-group">
+          <select id="rim" class="form-control" formControlName="rim">
+            <option *ngFor="let r of rims" [value]="r">{{r}}</option>
+          </select>
+          <select id="tyre" class="form-control" formControlName="tyre">
+            <option *ngFor="let t of tyres" [value]="t">{{t}}</option>
+          </select>
+        </div>
       </div>
       <div class="form-group">
-        <label for="largestChainRing">Teeth on largest front chain ring (e.g. 40)</label>
-        <select id="bike.largestChainRing" class="form-control">
-          <option *ngFor="let cr of chainRingSizes; let i = index">{{cr}}</option>
+        <label for="chainRing">Teeth on largest front chain ring (e.g. 40)</label>
+        <select id="chainRing" class="form-control" formControlName="chainRing">
+          <option *ngFor="let c of chainRings" [value]="c">{{c}}</option>
         </select>
       </div>
       <hr>
       <h4>Country to check</h4>
       <div class="form-group">
-        <label for="engineCategory">Nationality (e.g. GB or NL or US or FR)</label>
-        <select id="engineCategory" class="form-control">
-        <option *ngFor="let ec of engineCategories; let i = index">{{ec}}</option>
+        <label for="engine">Nationality (e.g. GB or NL or US or FR)</label>
+        <select id="engine" class="form-control" formControlName="engine">
+        <option *ngFor="let e of engines" [value]="e">{{e}}</option>
       </select>
       </div>
-      <button class="btn btn-primary" (click)="checkGearing()">Check Gearing</button>
+      <button class="btn btn-primary" type="submit">Check Gearing</button>
     </form>
   </div>
   <div class="col-sm-6">
