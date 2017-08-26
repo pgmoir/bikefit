@@ -5,8 +5,7 @@ import { BikeService } from './bike.service';
 @Component({
   selector: 'app-bikes',
   templateUrl: './bikes.component.html',
-  styleUrls: ['./bikes.component.css'],
-  providers: [BikeService]
+  styleUrls: ['./bikes.component.css']
 })
 export class BikesComponent implements OnInit {
 

@@ -1,3 +1,62 @@
-<p>
-  bike-edit works!
-</p>
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="bikeForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button [disabled]="!bikeForm.valid" type="submit" class="btn btn-success">Save</button>
+          <button class="btn btn-danger" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" formControlName="name" class="form-control" required>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="imagePath">Image Url</label>
+            <input type="text" id="imagePath" formControlName="imagePath" class="form-control" #imagePath>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <img [src]="imagePath.value" class="img-responsive">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea type="text" id="description" formControlName="description" class="form-control" rows="6" required></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12" formArrayName="users">
+            <label *ngIf="bikeForm.get('users').controls.length > 0">Users - First Name (required), Last Name</label>
+            <div class="row" *ngFor="let bikeCtrl of bikeForm.get('users').controls; let i = index" [formGroupName]="i" style="margin-bottom: 10px;">
+            <div class="col-xs-5">
+              <input type="text" class="form-control" formControlName="firstname" required>
+            </div>
+            <div class="col-xs-5">
+              <input type="text" class="form-control" formControlName="lastname">
+            </div>
+            <div class="col-xs-2">
+              <button class="btn btn-danger" type="button" (click)="onDeleteUser(i)">x</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <button type="button" class="btn btn-success" (click)="onAddUser()">Add User</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

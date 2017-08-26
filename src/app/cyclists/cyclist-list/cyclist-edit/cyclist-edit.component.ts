@@ -1,4 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs/Rx';
 
 import { Cyclist } from '../../../shared/models/cyclist.model';
 import { CyclistService } from '../../cyclist.service';
@@ -8,25 +10,55 @@ import { CyclistService } from '../../cyclist.service';
   templateUrl: './cyclist-edit.component.html',
   styleUrls: ['./cyclist-edit.component.css']
 })
-export class CyclistEditComponent implements OnInit {
-
-  @ViewChild('firstnameInput') firstnameInputRef: ElementRef;
-  @ViewChild('lastnameInput') lastnameInputRef: ElementRef;
-  @ViewChild('genderInput') genderInputRef: ElementRef;
+export class CyclistEditComponent implements OnInit, OnDestroy {
+  @ViewChild('f') cyclistForm: NgForm;
+  subscription: Subscription;
+  editMode = false;
+  editedItemIndex: number;
+  editedItem: Cyclist;
 
   genders: string[] = ['male', 'female'];
 
   constructor(private cyclistService: CyclistService) { }
 
   ngOnInit() {
+    this.subscription = this.cyclistService.startedEditing
+      .subscribe(
+        (index: number) => {
+          this.editedItemIndex = index;
+          this.editMode = true;
+          this.editedItem = this.cyclistService.getCyclist(index);
+          this.cyclistForm.setValue({
+            firstname: this.editedItem.firstname,
+            lastname: this.editedItem.lastname,
+            gender: this.editedItem.gender
+          });
+        }
+      );
   }
 
-  onAddItem() {
-    const firstname = this.firstnameInputRef.nativeElement.value;
-    const lastname = this.lastnameInputRef.nativeElement.value;
-    const gender = this.genderInputRef.nativeElement.value;
-    const newCyclist = new Cyclist(firstname, lastname, gender, 0, '', 0);
-    this.cyclistService.addCyclist(newCyclist);
+  onSubmit(form: NgForm) {
+    const value = form.value;
+    const newCyclist = new Cyclist(value.firstname, value.lastname, value.gender, 0, '', 0);
+    if (this.editMode) {
+      this.cyclistService.updateCyclist(this.editedItemIndex, newCyclist);
+    } else {
+      this.cyclistService.addCyclist(newCyclist);
+    }
+    this.onClear();
   }
 
+  onDelete() {
+    this.cyclistService.deleteCyclist(this.editedItemIndex);
+    this.onClear();
+  }
+
+  onClear() {
+    this.editMode = false;
+    this.cyclistForm.reset();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

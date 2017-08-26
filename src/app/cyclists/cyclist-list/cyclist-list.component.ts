@@ -24,6 +24,10 @@ export class CyclistListComponent implements OnInit, OnDestroy {
     );
   }
 
+  onEditItem(index: number) {
+    this.cyclistService.startedEditing.next(index);
+  }
+
   ngOnDestroy() {
     this.cyclistsChangedSub.unsubscribe();
   }

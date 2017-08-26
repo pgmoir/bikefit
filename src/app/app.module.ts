@@ -1,3 +1,4 @@
+import { BikeService } from './bikes/bike.service';
 import { AuthGuard } from './shared/auth-guard.service';
 import { AuthService } from './shared/auth.service';
 import { NgModule } from '@angular/core';
@@ -78,7 +79,7 @@ import { GearCheck2Component } from './gear-check2/gear-check2.component';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [GearCheckService, UrlHelperService, CyclistService, AuthService, AuthGuard],
+  providers: [GearCheckService, UrlHelperService, CyclistService, AuthService, AuthGuard, BikeService],
   bootstrap: [AppComponent]
 })
 
