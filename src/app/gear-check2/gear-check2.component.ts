@@ -58,10 +58,10 @@ export class GearCheck2Component implements OnInit {
       }),
       'bike': new FormGroup({
         'wheelSize': new FormGroup({
-          'rim': new FormControl(this.rims[0]),
-          'tyre': new FormControl(this.tyres[0]),
+          'rim': new FormControl('700c/29er'),
+          'tyre': new FormControl('23mm'),
         }),
-        'chainRing': new FormControl(this.chainRings[0]),
+        'chainRing': new FormControl(48),
       }),
       'engine': new FormControl(this.engines[0])
     });
