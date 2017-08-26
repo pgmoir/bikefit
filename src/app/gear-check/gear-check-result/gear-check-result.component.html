@@ -3,12 +3,12 @@
     Please fill in the details of the cyclist, bike and select the country where the cycling activity is taking place, and then click on <strong>Check Gearing</strong> button.
   </div>
 </div>
-<div *ngIf="result && !result.validResult">
-  <div class="alert alert-danger">
-    An error occurred.
+<div *ngIf="result && result.resultStatus === 'pending'">
+  <div class="alert alert-info">
+    Calculating youth category and gear recommendation ...
   </div>
 </div>
-<div *ngIf="result && result.validResult">
+<div *ngIf="result && result.resultStatus === 'valid'">
   <div class="alert alert-success">
     This {{result.options.gender}} rider, aged {{result.ageAtStart}} at the start of this year, in {{result.options.country}}
     will ride in category {{result.youthCategory}}. They are restricted to a rollout length of {{result.restrictionDistance}}m.
@@ -25,5 +25,10 @@
     If you want to know how a bike gear check is performed using the rollout test, then <a href="https://youtu.be/QsD1NTZpSs0" target="_new" class="alert-link">watch this video</a>,
     again from the very helpful people at BTF Gear Restrictions (British Triathalon). The rollout is a very standard, global approach to checking restrictions on youth bikes. The actual 
     distances permitted for age categories in different disciplines and countries will vary.
+  </div>
+</div>
+<div *ngIf="result && result.resultStatus !== 'pending' && result.resultStatus !== 'valid'">
+  <div class="alert alert-danger">
+    An error occurred.
   </div>
 </div>

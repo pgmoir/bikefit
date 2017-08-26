@@ -80,7 +80,7 @@ export class GearCheck2Component implements OnInit {
         },
         (error) => {
           console.log(error);
-          this.gearCheck.validResult = false;
+          this.gearCheck.resultStatus = 'error';
         }
       );
   }

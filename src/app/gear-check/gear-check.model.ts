@@ -12,10 +12,11 @@ export class GearCheckModel {
   public smallestGear: number;
   public rolloutDistance: number;
   public tyreCircumference: number;
-  public validResult: boolean;
+  public resultStatus: string;
   public recommendation: string;
 
   constructor(options: GearOptionsModel) {
+    this.resultStatus = 'pending';
     this.options = options;
   }
 }

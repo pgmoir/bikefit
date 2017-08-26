@@ -47,7 +47,7 @@ export class GearCheckComponent implements OnInit {
         },
         (error) => {
           console.log(error);
-          this.gearCheck.validResult = false;
+          this.gearCheck.resultStatus = 'error';
         }
       );
   }
