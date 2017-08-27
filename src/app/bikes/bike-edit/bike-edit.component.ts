@@ -14,6 +14,8 @@ export class BikeEditComponent implements OnInit {
   editMode = false;
   bikeForm: FormGroup;
 
+  statuses: string[] = [ 'active', 'inactive', 'forsale', 'sold', 'stolen', 'found/returned' ];
+
   constructor(private route: ActivatedRoute, private bikeService: BikeService, private router: Router) { }
 
   ngOnInit() {
@@ -34,6 +36,7 @@ export class BikeEditComponent implements OnInit {
     let bikeName = '';
     let bikeImagePath = '';
     let bikeDescription = '';
+    let bikeStatus = 'active';
     const bikeUsers = new FormArray([]);
 
     if (this.editMode) {
@@ -41,6 +44,7 @@ export class BikeEditComponent implements OnInit {
       bikeName = bike.name;
       bikeImagePath = bike.imagePath;
       bikeDescription = bike.description;
+      bikeStatus = bike.status ? bike.status : 'active';
       if (bike['users']) {
         for (const user of bike.users) {
           bikeUsers.push(
@@ -53,10 +57,13 @@ export class BikeEditComponent implements OnInit {
       }
     }
 
+    console.log('Status ' + bikeStatus);
+
     this.bikeForm = new FormGroup({
       'name': new FormControl(bikeName, Validators.required),
       'imagePath': new FormControl(bikeImagePath),
       'description': new FormControl(bikeDescription, Validators.required),
+      'status': new FormControl(bikeStatus, Validators.required),
       'users': bikeUsers
     });
   }

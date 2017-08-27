@@ -3,12 +3,6 @@
     <form [formGroup]="bikeForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col-xs-12">
-          <button [disabled]="!bikeForm.valid" type="submit" class="btn btn-success">Save</button>
-          <button class="btn btn-danger" (click)="onCancel()">Cancel</button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
           <div class="form-group">
             <label for="name">Name</label>
             <input type="text" id="name" formControlName="name" class="form-control" required>
@@ -37,6 +31,16 @@
         </div>
       </div>
       <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" formControlName="status" class="form-control" required>
+              <option *ngFor="let s of statuses" [value]="s">{{s}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-xs-12" formArrayName="users">
             <label *ngIf="bikeForm.get('users').controls.length > 0">Users - First Name (required), Last Name</label>
             <div class="row" *ngFor="let bikeCtrl of bikeForm.get('users').controls; let i = index" [formGroupName]="i" style="margin-bottom: 10px;">
@@ -55,6 +59,12 @@
               <button type="button" class="btn btn-success" (click)="onAddUser()">Add User</button>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button [disabled]="!bikeForm.valid" type="submit" class="btn btn-success">Save</button>
+          <button class="btn btn-danger" (click)="onCancel()">Cancel</button>
         </div>
       </div>
     </form>

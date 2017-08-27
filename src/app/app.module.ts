@@ -1,7 +1,7 @@
 import { BikeService } from './bikes/bike.service';
 import { AuthGuard } from './shared/auth-guard.service';
 import { AuthService } from './shared/auth.service';
-import { NgModule } from '@angular/core';
+import { NgModule, PipeTransform } from '@angular/core';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -32,6 +32,9 @@ import { BetterHighlightDirective } from './shared/directives/better-hightlight.
 import { AnotherHighlightDirective } from './shared/directives/another-highlight.directive';
 import { FourthHighlightDirective } from './shared/directives/fourth-highlight.directive';
 import { UnlessDirective } from './shared/directives/unless.directive';
+
+import { ShortenPipe } from './shared/pipes/shorten.pipe';
+import { FilterPipe } from './shared/pipes/filter.pipe';
 
 import { GearCheckService } from './gear-check/gear-check.service';
 import { UrlHelperService } from './shared/url-helper.service';
@@ -70,7 +73,9 @@ import { GearCheck2Component } from './gear-check2/gear-check2.component';
     NotFoundComponent,
     BikeStartComponent,
     BikeEditComponent,
-    GearCheck2Component
+    GearCheck2Component,
+    ShortenPipe,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
