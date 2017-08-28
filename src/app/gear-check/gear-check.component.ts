@@ -30,7 +30,7 @@ export class GearCheckComponent implements OnInit {
 
   ngOnInit() {
     this.cyclist = new Cyclist('', '', '', 0, '', 0);
-    this.bike = new Bike('', '', '', '', '', 0, []);
+    this.bike = new Bike('', '', '', '', '', '', '', 0, []);
     this.engineCategory = 'GB';
     this.recommendation = '';
   }
