@@ -1,11 +1,27 @@
 <div class="row">
   <div class="col-xs-12">
-    <app-bike-item *ngFor="let bikeEl of bikes; let i = index" [bike]="bikeEl" [index]="i"></app-bike-item>
+    <label for="filteredStatus">Filter Bikes</label>
+    <select name="filteredStatus" [(ngModel)]="filteredStatus" class="form-control">
+      <option value="*">All</option>
+      <option value="Active">Active</option>
+      <option value="Inactive">Inactive</option>
+      <option value="For Sale">For Sale</option>
+      <option value="Sold">Sold</option>
+      <option value="Stolen">Stolen</option>
+      <option value="Deleted">Deleted</option>
+    </select>
   </div>
 </div>
-<br>
+<hr>
+<div class="row">
+  <div class="col-xs-12">
+    <app-bike-item *ngFor="let bikeEl of bikes | filter:filteredStatus:'status'; let i = index" [bike]="bikeEl" [index]="i"></app-bike-item>
+  </div>
+</div>
+<hr>
 <div class="row">
   <div class="col-xs-12">
     <button class="btn btn-success" (click)="onNewBike()">New Bike</button>
   </div>
 </div>
+<hr>

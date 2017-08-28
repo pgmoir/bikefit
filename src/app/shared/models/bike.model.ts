@@ -10,6 +10,7 @@ export class Bike {
   public name: string;
   public description: string;
   public status: string;
+  public type: string;
   public imagePath: string;
   public rim: string;
   public tyre: string;
@@ -22,14 +23,15 @@ export class Bike {
 
   public users: Cyclist[];
 
-  constructor(name: string, description: string, imagePath: string, rim: string, tyre: string, largestChainRing: number, users: Cyclist[]) {
+  constructor(name: string, description: string, type: string, status: string, imagePath: string, rim: string, tyre: string, largestChainRing: number, users: Cyclist[]) {
     this.name = name;
     this.description = description;
+    this.type = type;
+    this.status = status;
     this.imagePath = imagePath;
     this.rim = rim;
     this.tyre = tyre;
     this.largestChainRing = largestChainRing;
     this.users = users;
-    this.status = 'active';
   }
 }

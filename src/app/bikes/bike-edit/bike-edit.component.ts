@@ -14,7 +14,7 @@ export class BikeEditComponent implements OnInit {
   editMode = false;
   bikeForm: FormGroup;
 
-  statuses: string[] = [ 'active', 'inactive', 'forsale', 'sold', 'stolen', 'found/returned' ];
+  statuses: string[] = [ 'Active', 'Inactive', 'For Sale', 'Sold', 'Stolen', 'Deleted' ];
 
   constructor(private route: ActivatedRoute, private bikeService: BikeService, private router: Router) { }
 
@@ -36,7 +36,7 @@ export class BikeEditComponent implements OnInit {
     let bikeName = '';
     let bikeImagePath = '';
     let bikeDescription = '';
-    let bikeStatus = 'active';
+    let bikeStatus = 'Active';
     const bikeUsers = new FormArray([]);
 
     if (this.editMode) {
@@ -44,7 +44,7 @@ export class BikeEditComponent implements OnInit {
       bikeName = bike.name;
       bikeImagePath = bike.imagePath;
       bikeDescription = bike.description;
-      bikeStatus = bike.status ? bike.status : 'active';
+      bikeStatus = bike.status;
       if (bike['users']) {
         for (const user of bike.users) {
           bikeUsers.push(

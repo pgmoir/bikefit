@@ -6,3 +6,7 @@ input[required], select[required], textarea[required] {
 input.ng-invalid.ng-touched, select.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched  {
   border-left: 5px solid #a94442; /* red */
 }
+
+/* .row {
+  border: 1px solid #EAE2E2;
+} */
