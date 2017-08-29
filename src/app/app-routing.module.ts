@@ -1,10 +1,12 @@
+import { SigninComponent } from './auth/signin/signin.component';
+import { SignupComponent } from './auth/signup/signup.component';
 import { GearCheck2Component } from './gear-check2/gear-check2.component';
 import { BikeEditComponent } from './bikes/bike-edit/bike-edit.component';
 import { BikeDetailComponent } from './bikes/bike-detail/bike-detail.component';
 import { BikeStartComponent } from './bikes/bike-start/bike-start.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from './shared/auth-guard.service';
+// import { AuthGuard } from './shared/auth-guard.service';
 
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
@@ -25,6 +27,8 @@ const appRoutes: Routes = [
   ] },
   { path: 'cyclists', component: CyclistsComponent },
   { path: 'kit', component: KitComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'signin', component: SigninComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: '/not-found' }
 ];

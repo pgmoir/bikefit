@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-        <a routerLink="/" class="navbar-left"><img src="assets/gears-tvs.png"></a>
+      <a routerLink="/" class="navbar-left"><img src="assets/gears-tvs.png"></a>
     </div>
     <!-- <div class="navbar-default"> -->
     <div class="collapse navbar-collapse">
@@ -13,7 +13,12 @@
         <li routerLinkActive="active"><a routerLink="/kit">Kit</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown" appDropdown>
+        <ng-template [ngIf]="!authService.isAuthenticated()">
+          <li><a routerLink="/signup">Register</a></li>
+          <li><a routerLink="/signin">Login</a></li>
+        </ng-template>
+        <li><a style="cursor: pointer;" (click)="onLogout()" *ngIf="authService.isAuthenticated()">Logout</a></li>
+        <li class="dropdown" appDropdown *ngIf="authService.isAuthenticated()">
           <a style="cursor: pointer" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a style="cursor: pointer" (click)="onSaveData()">Save Data</a></li>
