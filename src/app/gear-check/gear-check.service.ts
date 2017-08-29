@@ -9,8 +9,8 @@ import { UrlHelperService } from './../shared/url-helper.service';
 
 export class GearCheckService {
 
-  private urlCalculateRestrition = 'https://us-central1-bikefit-24ea3.cloudfunctions.net/calculateRestriction?';
-  //private urlCalculateRestrition = 'http://localhost:5000/bikefit-24ea3/us-central1/calculateRestriction?';
+  private urlCalculateRestrition = 'https://us-central1-youthgearcheck.cloudfunctions.net/calculateRestriction?';
+  //private urlCalculateRestrition = 'http://localhost:5000/youthgearcheck/us-central1/calculateRestriction?';
 
   constructor(private http: Http, private urlHelperService: UrlHelperService) {}
 
