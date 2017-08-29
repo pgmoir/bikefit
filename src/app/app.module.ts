@@ -8,9 +8,6 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { GearCheckComponent } from './gear-check/gear-check.component';
-import { GearCheckResultComponent } from './gear-check/gear-check-result/gear-check-result.component';
-import { GearCheckCyclistComponent } from './gear-check/gear-check-cyclist/gear-check-cyclist.component';
-import { GearCheckBikeComponent } from './gear-check/gear-check-bike/gear-check-bike.component';
 import { DateControlComponent } from './common/date-control/date-control.component';
 import { HeaderComponent } from './header/header.component';
 import { WheelSizeComponent } from './common/wheel-size/wheel-size.component';
@@ -45,18 +42,15 @@ import { BikeService } from './bikes/bike.service';
 import { AppComponent } from './app.component';
 import { BikeStartComponent } from './bikes/bike-start/bike-start.component';
 import { BikeEditComponent } from './bikes/bike-edit/bike-edit.component';
-import { GearCheck2Component } from './gear-check2/gear-check2.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
+import { GearCheckResultComponent } from './gear-check/gear-check-result/gear-check-result.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GearCheckComponent,
     DropDownDirective,
-    GearCheckResultComponent,
-    GearCheckCyclistComponent,
-    GearCheckBikeComponent,
     DateControlComponent,
     HeaderComponent,
     WheelSizeComponent,
@@ -77,11 +71,11 @@ import { SigninComponent } from './auth/signin/signin.component';
     NotFoundComponent,
     BikeStartComponent,
     BikeEditComponent,
-    GearCheck2Component,
     ShortenPipe,
     FilterPipe,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    GearCheckResultComponent
   ],
   imports: [
     BrowserModule,
