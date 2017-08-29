@@ -29,6 +29,11 @@ export class BikeService {
 
   constructor(private cyclistService: CyclistService) { }
 
+  setBikes(bikes: Bike[]) {
+    this.bikes = bikes;
+    this.bikesChanged.next(this.bikes.slice());
+  }
+
   getBikes() {
     return this.bikes.slice();
   }
@@ -49,7 +54,6 @@ export class BikeService {
 
   updateBike(index: number, bike: Bike) {
     this.bikes[index] = bike;
-    this.bikesChanged.next(this.bikes.slice());
   }
 
   deleteBike(index: number) {
