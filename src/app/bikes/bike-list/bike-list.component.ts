@@ -13,7 +13,7 @@ import { BikeService } from '../bike.service';
 export class BikeListComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   bikes: Bike[];
-  filteredStatus = 'Active';
+  filteredStatus = '*';
 
   constructor(private bikeService: BikeService, private router: Router, private route: ActivatedRoute) { }
 

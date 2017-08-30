@@ -16,7 +16,7 @@ export class GearOptionsModel {
 
     this.rim = bike.rim;
     this.tyre = bike.tyre;
-    this.largestChainRing = bike.largestChainRing;
+    this.largestChainRing = bike.getLargestChainRing();
 
     this.country = country;
   }

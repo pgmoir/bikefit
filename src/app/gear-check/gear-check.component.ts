@@ -88,7 +88,7 @@ export class GearCheckComponent implements OnInit {
   private getGearOptionsModel() {
     const form = this.gearCheckForm.value;
     const cyclist = new Cyclist('', '', form.cyclist.gender, +form.cyclist.dateOfBirth.day, form.cyclist.dateOfBirth.month, +form.cyclist.dateOfBirth.year);
-    const bike = new Bike('', '', '', '', '', form.bike.wheelSize.rim, form.bike.wheelSize.tyre, +form.bike.chainRing, []);
+    const bike = new Bike('', '', '', [], '', form.bike.wheelSize.rim, form.bike.wheelSize.tyre, [+form.bike.chainRing]);
     const options = new GearOptionsModel(cyclist, bike, form.engine);
     options.dateOfBirth = +this.getDateOfBirth(cyclist);
     return options;

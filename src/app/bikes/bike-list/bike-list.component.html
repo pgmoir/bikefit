@@ -1,27 +1,27 @@
 <div class="row">
   <div class="col-xs-12">
-    <label for="filteredStatus">Filter Bikes</label>
+    <div class="form-group">
+    <label for="filteredStatus" class="form-label">Filter</label>
     <select name="filteredStatus" [(ngModel)]="filteredStatus" class="form-control">
-      <option value="*">All</option>
-      <option value="Active">Active</option>
-      <option value="Inactive">Inactive</option>
-      <option value="For Sale">For Sale</option>
-      <option value="Sold">Sold</option>
-      <option value="Stolen">Stolen</option>
-      <option value="Deleted">Deleted</option>
+      <option value="*">all</option>
+      <option value="active">active</option>
+      <option value="inactive">inactive</option>
+      <option value="forsale">forsale</option>
+      <option value="sold">sold</option>
+      <option value="stolen">stolen</option>
+      <option value="deleted">deleted</option>
+      <option value="demo">demo</option>
     </select>
   </div>
 </div>
-<hr>
-<div class="row">
+</div>
+<div class="row space-bottom">
   <div class="col-xs-12">
     <app-bike-item *ngFor="let bikeEl of bikes | filter:filteredStatus:'status'; let i = index" [bike]="bikeEl" [index]="i"></app-bike-item>
   </div>
 </div>
-<hr>
-<div class="row">
+<div class="row space-bottom">
   <div class="col-xs-12">
     <button class="btn btn-success" (click)="onNewBike()">New Bike</button>
   </div>
 </div>
-<hr>

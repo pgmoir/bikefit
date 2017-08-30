@@ -1,9 +1,11 @@
 <a style="cursor: pointer;" class="list-group-item clearfix" [routerLink]="[index]" routerLinkActive="active">
-  <div class="pull-left">
-    <h4 class="list-group-item-heading">{{ bike.name }}</h4>
-    <p class="list-group-item-text">{{ bike.description }}</p>
+  <div class="row">
+    <div class="col-xs-8">
+      <h4 class="list-group-item-heading">{{ bike.name }} ({{ bike.status }})</h4>
+      <p class="list-group-item-text">{{ bike.description }}</p>
+    </div>
+    <div class="col-xs-4">
+      <img [src]="bike.imagePath" alt="{{ bike.name }}" class="img-responsive" style="max-height: 50px;">
+    </div>
   </div>
-  <span class="pull-right">
-    <img [src]="bike.imagePath" alt="{{ bike.name }}" class="img-responsive" style="max-height: 50px;">
-  </span>
 </a>

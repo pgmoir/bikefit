@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { BikeEvent } from './bike-event.model';
 
 /*
@@ -13,13 +14,13 @@ export class Bike {
   public imagePath: string;
   public type: string[]; // array of activity types bike is used for
   public status: string; // active, inactive, forsale, sold, stolen, deleted, demo
-  
+
   // features for gear check
   public rim: string;
   public tyre: string;
   public chainRings: number[];
 
-  // advanced features 
+  // advanced features
   public frame: string;
   public frameSize: string;
   public fork: string;
@@ -31,7 +32,7 @@ export class Bike {
   public brakes: string;
   public cassette: number[];
   public cassetteSize: number;
-  public wheelSet: string;  
+  public wheelSet: string;
   public tyres: string;
   public cranks: string;
   public crankSize: number;
@@ -52,13 +53,13 @@ export class Bike {
   public history: BikeEvent[];
 
   // constructor contains main elements for creating a bike based on gear check requirements
-  constructor(name: string, description: string, imagePath: string, type: string[], status: string, 
+  constructor(name: string, description: string, imagePath: string, type: string[], status: string,
     rim: string, tyre: string, chainRings: number[]) {
     this.name = name;
     this.description = description;
+    this.imagePath = imagePath;
     this.type = type;
     this.status = status;
-    this.imagePath = imagePath;
     this.rim = rim;
     this.tyre = tyre;
     this.chainRings = chainRings;
@@ -80,7 +81,7 @@ export class Bike {
     this.brakes = brakes;
     this.cassette = cassette;
     this.cassetteSize = cassetteSize;
-    this.wheelSet = wheelSet; 
+    this.wheelSet = wheelSet;
     this.tyres = tyres;
     this.cranks = cranks;
     this.crankSize = crankSize;
@@ -98,5 +99,9 @@ export class Bike {
     this.purchasePrice = purchasePrice;
     this.purchaseMode = purchaseMode;
     this.salePrice = salePrice;
+  }
+
+  getLargestChainRing() {
+    return _.max(this.chainRings);
   }
 }

@@ -1,11 +1,12 @@
-import { Injectable, OnInit } from '@angular/core';
+import { AuthService } from './../auth/auth.service';
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Rx';
 
 import { Bike } from './../shared/models/bike.model';
 import { BikeEvent } from './../shared/models/bike-event.model';
 
 @Injectable()
-export class BikeService implements OnInit {
+export class BikeService {
   bikesChanged = new Subject<Bike[]>();
 
   private bikes: Bike[] = [];
@@ -32,19 +33,24 @@ export class BikeService implements OnInit {
 //   'https://static.evanscycles.com/production/bikes/kids-bikes/product-image/484-319/moda-minor-24-2012-kids-road-bike-24-inch-wheel-EV175064-9999-1.jpg',
 //   ['Road'], 'Sold', '700c/29er', '23mm', [50])
 
-  constructor() { }
+  constructor(private authService: AuthService) {
+    this.initialise();
+  }
 
-  ngOnInit() {
+  initialise() {
+    if (!this.authService.isAuthenticated()) {
+      this.loadDemoBike();
+    }
   }
 
   loadDemoBike() {
-    this.bikes = null;
+    console.log('loading');
 
-    var wroxDemo = new Bike('Junior Worx', 'Road and Cycle Cross bike aimed at U8 – U10 riders.',
+    const wroxDemo = new Bike('Junior Worx', 'Road and Cycle Cross bike aimed at U8 – U10 riders.',
     'http://cdn.mos.bikeradar.imdserve.com/images/news/2014/11/11/1415795477555-1wxd0um2z2e7n-630-354.jpg',
-    ['road','cyclocross'], 'active', '24"', '25mm', [34]);
-    // additional properties
+    ['road', 'cyclocross'], 'demo', '24"', '25mm', [34]);
 
+    // additional properties
     wroxDemo.setAdvancedProperties('Worx hydroformed profiled aliuminium 6061 triple butted',
       '24″ wheel', 'Worx tapered aerosection blades aliuminium', 'FSA ZS-4D',
       'Microshift R9', 'WORX 7075', 'N/A', 'Microshift Short Reach 9 Speed',
@@ -61,7 +67,6 @@ export class BikeService implements OnInit {
     ];
 
     this.bikes.push(wroxDemo);
-
   }
 
   setBikes(bikes: Bike[]) {
@@ -70,6 +75,7 @@ export class BikeService implements OnInit {
   }
 
   getBikes() {
+    console.log('getbikes');
     return this.bikes.slice();
   }
 

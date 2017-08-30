@@ -32,9 +32,9 @@ export class BikeDetailComponent implements OnInit, OnDestroy {
     this.paramsSubscription.unsubscribe();
   }
 
-  onAddToCyclists() {
-    this.bikeService.addUsersToCyclists(this.bike.users);
-  }
+  // onAddToCyclists() {
+  //   this.bikeService.addUsersToCyclists(this.bike.users);
+  // }
 
   onEditBike() {
     this.router.navigate(['edit'], { relativeTo: this.route});
