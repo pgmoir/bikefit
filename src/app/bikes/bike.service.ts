@@ -46,27 +46,27 @@ export class BikeService {
   loadDemoBike() {
     console.log('loading');
 
-    const wroxDemo = new Bike('Junior Worx', 'Road and Cycle Cross bike aimed at U8 – U10 riders.',
+    const worxDemo = new Bike('Junior Worx', 'Road and Cycle Cross bike aimed at U8 – U10 riders.',
     'http://cdn.mos.bikeradar.imdserve.com/images/news/2014/11/11/1415795477555-1wxd0um2z2e7n-630-354.jpg',
-    ['road', 'cyclocross'], 'demo', '24"', '25mm', [34]);
+    ['road', 'cyclocross'], 'demo', '24inch S5', '25mm', [34]);
 
     // additional properties
-    wroxDemo.setAdvancedProperties('Worx hydroformed profiled aliuminium 6061 triple butted',
+    worxDemo.setAdvancedProperties('Worx hydroformed profiled aliuminium 6061 triple butted',
       '24″ wheel', 'Worx tapered aerosection blades aliuminium', 'FSA ZS-4D',
       'Microshift R9', 'WORX 7075', 'N/A', 'Microshift Short Reach 9 Speed',
       'Tektro Oryx Canti', [11, 32], 9, 'Worx WRT 160', 'Kenda Road Tyre',
       'Worx 140mm', 34, 'FSA', 'Worx 340mm Short Drop',
       'Custom Junior', 'Worx', 'Wellgo', 600, 'Black & Blue', 8.6);
 
-    wroxDemo.setPurchaseSaleProperties(495, 'new', null);
+    worxDemo.setPurchaseSaleProperties(495, 'new', null);
 
-    wroxDemo.history = [
+    worxDemo.history = [
       new BikeEvent(new Date(20151204), 'Purchased from Worx for £495', false, false, 'transaction'),
       new BikeEvent(new Date(20160517), 'Punctured front tyre. Replaced inner tube.', false, false, 'repair'),
       new BikeEvent(new Date(20160918), 'Replaced handlebar tape', false, false, 'repair')
     ];
 
-    this.bikes.push(wroxDemo);
+    this.bikes.push(worxDemo);
   }
 
   setBikes(bikes: Bike[]) {

@@ -46,25 +46,34 @@
         </div>
       </div>
       <div class="row">
-          <div class="col-xs-12">
-            <div class="form-group">
-              <label for="rim">Rim</label>
-              <input type="text" id="imagePath" formControlName="imagePath" class="form-control" #imagePath>
-            </div>
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="rim">Rim</label>
+            <select id="rim" formControlName="rim" class="form-control" required>
+                <option *ngFor="let r of rims" [value]="r">{{r}}</option>
+              </select>
           </div>
         </div>
-        <div class="row">
-            <div class="col-xs-12">
-              <div class="form-group">
-                <label for="imagePath">Image Url</label>
-                <input type="text" id="imagePath" formControlName="imagePath" class="form-control" #imagePath>
-              </div>
-            </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="tyre">Tyre</label>
+            <select id="tyre" formControlName="tyre" class="form-control" required>
+                  <option *ngFor="let t of tyres" [value]="t">{{t}}</option>
+                </select>
           </div>
-            <div class="row">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <h4>History</h4>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-xs-12" formArrayName="history">
-            <label *ngIf="bikeForm.get('history').controls.length > 0">History - Date (required), Detail (required)</label>
-            <div class="row space-bottom" *ngFor="let bikeCtrl of bikeForm.get('history').controls; let i = index" [formGroupName]="i">
+          <label *ngIf="bikeForm.get('history').controls.length > 0">Date (required), Detail (required)</label>
+          <div class="row space-bottom" *ngFor="let bikeCtrl of bikeForm.get('history').controls; let i = index" [formGroupName]="i">
             <div class="col-xs-3">
               <input type="text" class="form-control" formControlName="eventDate" required>
             </div>

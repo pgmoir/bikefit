@@ -1,5 +1,3 @@
-import { AuthService } from './auth/auth.service';
-
 import { NgModule, PipeTransform } from '@angular/core';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -37,7 +35,9 @@ import { UrlHelperService } from './shared/url-helper.service';
 import { CyclistService } from './cyclists/cyclist.service';
 import { DataStorageService } from './shared/data-storage.service';
 import { BikeService } from './bikes/bike.service';
-// import { AuthGuard } from './shared/auth-guard.service';
+import { AuthGuard } from './auth/auth-guard.service';
+import { AuthService } from './auth/auth.service';
+
 
 import { AppComponent } from './app.component';
 import { BikeStartComponent } from './bikes/bike-start/bike-start.component';
@@ -84,7 +84,7 @@ import { GearCheckResultComponent } from './gear-check/gear-check-result/gear-ch
     HttpModule,
     AppRoutingModule
   ],
-  providers: [GearCheckService, UrlHelperService, CyclistService, BikeService, DataStorageService, AuthService],
+  providers: [GearCheckService, UrlHelperService, CyclistService, BikeService, DataStorageService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 
