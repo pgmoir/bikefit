@@ -11,6 +11,8 @@ export class KitComponent implements OnInit {
   shirts: string[] = ['orica blue shirt', 'sky white shirt', 'yellow jersey shirt'];
   value = 10;
 
+  onlyShirts = false;
+
   constructor() { }
 
   ngOnInit() {

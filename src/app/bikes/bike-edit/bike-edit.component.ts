@@ -25,6 +25,8 @@ export class BikeEditComponent implements OnInit {
     '2.40"', '2.50"', '2.75"', '3.00"', '3.80"', '4.00"', '4.60"', '4.70"', '4.80"', '4.90"'
   ];
 
+  get formData() { return <FormArray>this.bikeForm.get('history'); }
+
   constructor(private route: ActivatedRoute, private bikeService: BikeService, private router: Router) { }
 
   ngOnInit() {

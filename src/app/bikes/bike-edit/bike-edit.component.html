@@ -72,8 +72,8 @@
       </div>
       <div class="row">
         <div class="col-xs-12" formArrayName="history">
-          <label *ngIf="bikeForm.get('history').controls.length > 0">Date (required), Detail (required)</label>
-          <div class="row space-bottom" *ngFor="let bikeCtrl of bikeForm.get('history').controls; let i = index" [formGroupName]="i">
+          <label *ngIf="formData.controls.length > 0">Date (required), Detail (required)</label>
+          <div class="row space-bottom" *ngFor="let bikeCtrl of formData.controls; let i = index" [formGroupName]="i">
             <div class="col-xs-3">
               <input type="text" class="form-control" formControlName="eventDate" required>
             </div>
