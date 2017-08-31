@@ -17,16 +17,7 @@ import { BikeStartComponent } from './bikes/bike-start/bike-start.component';
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'gear-check', component: GearCheckComponent },
-  { path: 'bikes', component: BikesComponent, children: [
-    { path: '', component: BikeStartComponent },
-    { path: 'new', component: BikeEditComponent, canActivate: [AuthGuard] },
-    { path: ':id', component: BikeDetailComponent },
-    { path: ':id/edit', component: BikeEditComponent, canActivate: [AuthGuard] }
-  ] },
-  { path: 'cyclists', component: CyclistsComponent },
   { path: 'kit', component: KitComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'signin', component: SigninComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: '/not-found' }
 ];
