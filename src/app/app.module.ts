@@ -1,14 +1,12 @@
-import { CyclistsModule } from './cyclists/cyclists.module';
-import { AuthModule } from './auth/auth.module';
-import { SharedModule } from './shared/shared.module';
 import { NgModule, PipeTransform } from '@angular/core';
-
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { AppRoutingModule } from './app-routing.module';
 
-import { GearCheckComponent } from './gear-check/gear-check.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AuthModule } from './auth/auth.module';
+import { SharedModule } from './shared/shared.module';
+
 import { DateControlComponent } from './common/date-control/date-control.component';
 import { HeaderComponent } from './header/header.component';
 import { WheelSizeComponent } from './common/wheel-size/wheel-size.component';
@@ -29,15 +27,12 @@ import { DataStorageService } from './shared/data-storage.service';
 import { BikeService } from './bikes/bike.service';
 import { AuthGuard } from './auth/auth-guard.service';
 import { AuthService } from './auth/auth.service';
-import { BikesModule } from './bikes/bikes.module';
 
 import { AppComponent } from './app.component';
-import { GearCheckResultComponent } from './gear-check/gear-check-result/gear-check-result.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GearCheckComponent,
     DateControlComponent,
     HeaderComponent,
     WheelSizeComponent,
@@ -48,8 +43,7 @@ import { GearCheckResultComponent } from './gear-check/gear-check-result/gear-ch
     FourthHighlightDirective,
     UnlessDirective,
     HomeComponent,
-    NotFoundComponent,
-    GearCheckResultComponent
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -58,8 +52,6 @@ import { GearCheckResultComponent } from './gear-check/gear-check-result/gear-ch
     HttpModule,
     SharedModule,
     AuthModule,
-    BikesModule,
-    CyclistsModule,
     AppRoutingModule
   ],
   providers: [

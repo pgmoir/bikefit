@@ -11,7 +11,6 @@ import { NgModule } from '@angular/core';
     SignupComponent
   ],
   imports: [
-    CommonModule,
     FormsModule,
     AuthRoutingModule
   ]

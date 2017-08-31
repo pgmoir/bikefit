@@ -9,7 +9,7 @@ import { BikeStartComponent } from './bike-start/bike-start.component';
 import { BikesComponent } from './bikes.component';
 
 const bikesRoutes: Routes = [
-  { path: 'bikes', component: BikesComponent, children: [
+  { path: '', component: BikesComponent, children: [
     { path: '', component: BikeStartComponent },
     { path: 'new', component: BikeEditComponent, canActivate: [AuthGuard] },
     { path: ':id', component: BikeDetailComponent },

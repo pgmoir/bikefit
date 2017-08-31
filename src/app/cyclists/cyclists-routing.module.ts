@@ -1,9 +1,10 @@
-import { CyclistsComponent } from './cyclists.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { CyclistsComponent } from './cyclists.component';
+
 const cyclistRoutes: Routes = [
-  { path: 'cyclists', component: CyclistsComponent }
+  { path: '', component: CyclistsComponent }
 ];
 
 @NgModule({
