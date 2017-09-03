@@ -9,7 +9,6 @@ export class AuthService {
   constructor(private router: Router) { }
 
   signupUser(email: string, password: string) {
-    console.log('signing up');
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .catch(
         error => console.log(error)
@@ -17,7 +16,6 @@ export class AuthService {
   }
 
   signinUser(email: string, password: string) {
-    console.log('signing in' + email + password);
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(
         response => {
@@ -43,10 +41,19 @@ export class AuthService {
       .then(
         (token: string) => this.token = token
       );
-    return this.token;
+      return this.token;
   }
 
   isAuthenticated() {
-    return this.token != null;
+    return (this.token != null);
+  }
+
+  // call this just after initialising the application
+  checkForExistingUser() {
+    const userKey = Object.keys(window.localStorage).filter(it => it.startsWith('firebase:authUser'))[0];
+    const user = userKey ? JSON.parse(localStorage.getItem(userKey)) : undefined;
+    if (user) {
+      this.token = user.stsTokenManager.accessToken;
+    }
   }
 }

@@ -1,3 +1,4 @@
+import { AuthService } from './auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 
@@ -9,11 +10,14 @@ import * as firebase from 'firebase';
 export class AppComponent implements OnInit {
   loadedFeature = 'gear-check';
 
+  constructor(private authService: AuthService) {}
+
   ngOnInit() {
     firebase.initializeApp({
       apiKey: 'AIzaSyDklQWpXJzdt4RRlYEZSF0LXThamRVtrYo',
       authDomain: 'youthgearcheck.firebaseapp.com'
     });
+    this.authService.checkForExistingUser();
   }
 
   onNavigate(feature: string) {
