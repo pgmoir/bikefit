@@ -11,26 +11,33 @@ export class DataStorageService {
 
   storeBikes() {
     const token = this.authService.getIdToken();
-    return this.httpClient.put('https://youthgearcheck.firebaseio.com/bikes.json?auth=' + token, this.bikeService.getBikes());
+    const uid = this.authService.getUserIdentifier();
+    return this.httpClient.put('https://youthgearcheck.firebaseio.com/' + uid + '/bikes.json?auth=' + token, this.bikeService.getBikes());
   }
 
   getBikes() {
-    const token = this.authService.getIdToken();
-    this.httpClient.get<Bike[]>('https://youthgearcheck.firebaseio.com/bikes.json?auth=' + token)
+    let uid = 'demo';
+    let authToken = '';
+    if (this.authService.getIdToken()) {
+      console.log('auth' + this.authService);
+      authToken = '?auth=' + this.authService.getIdToken();
+      uid = this.authService.getUserIdentifier();
+    }
+    this.httpClient.get<Bike[]>('https://youthgearcheck.firebaseio.com/' + uid + '/bikes.json' + authToken)
       .map(
-        (bikes) => {
-          for (const bike of bikes) {
-            if (!bike['users']) {
-              bike['users'] = [];
-            }
+      (bikes) => {
+        for (const bike of bikes) {
+          if (!bike['history']) {
+            bike['history'] = [];
           }
-          return bikes;
         }
+        return bikes;
+      }
       )
       .subscribe(
-        (bikes: Bike[]) => {
-          this.bikeService.setBikes(bikes);
-        }
+      (bikes: Bike[]) => {
+        this.bikeService.setBikes(bikes);
+      }
       );
   }
 }

@@ -10,7 +10,12 @@ export class AuthService {
 
   signupUser(email: string, password: string) {
     firebase.auth().createUserWithEmailAndPassword(email, password)
-      .catch(
+    .then(
+      response => {
+        this.login();
+      }
+    )
+    .catch(
         error => console.log(error)
       );
   }
@@ -19,11 +24,7 @@ export class AuthService {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(
         response => {
-          this.router.navigate(['/']);
-          firebase.auth().currentUser.getIdToken()
-            .then(
-              (token: string) => this.token = token
-            );
+          this.login();
         }
       )
       .catch(
@@ -31,17 +32,29 @@ export class AuthService {
       );
   }
 
-  logout() {
-    firebase.auth().signOut();
-    this.token = null;
-  }
-
-  getIdToken() {
+  private login() {
+    this.router.navigate(['/']);
     firebase.auth().currentUser.getIdToken()
       .then(
         (token: string) => this.token = token
       );
-      return this.token;
+}
+
+  logout() {
+    firebase.auth().signOut();
+    this.token = null;
+    this.router.navigate(['/']);
+  }
+
+  getIdToken() {
+    if (firebase.auth().currentUser) {
+      firebase.auth().currentUser.getIdToken()
+        .then(
+          (token: string) => this.token = token
+        );
+        return this.token;
+    }
+    return undefined;
   }
 
   isAuthenticated() {
@@ -55,5 +68,10 @@ export class AuthService {
     if (user) {
       this.token = user.stsTokenManager.accessToken;
     }
+  }
+
+  getUserIdentifier() {
+    const user = firebase.auth().currentUser;
+    return user ? user.uid : undefined;
   }
 }

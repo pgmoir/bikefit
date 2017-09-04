@@ -38,9 +38,11 @@ export class BikeService {
   }
 
   initialise() {
-    if (!this.authService.isAuthenticated()) {
-      this.loadDemoBike();
-    }
+    // if (!this.authService.isAuthenticated()) {
+    //   this
+    //   //this.loadDemoBike();
+    // }
+
   }
 
   loadDemoBike() {
