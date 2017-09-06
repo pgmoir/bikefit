@@ -21,7 +21,6 @@ export class DataStorageService {
       )
       .subscribe(
         (bikes: Bike[]) => {
-          console.log(bikes);
           this.bikeService.setBikes(bikes);
         }
       );

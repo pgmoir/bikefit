@@ -26,8 +26,6 @@ export class BikeEditComponent implements OnInit {
     '2.40"', '2.50"', '2.75"', '3.00"', '3.80"', '4.00"', '4.60"', '4.70"', '4.80"', '4.90"'
   ];
 
-  get formData() { return <FormArray>this.bikeForm.get('history'); }
-
   constructor(private route: ActivatedRoute, private bikeService: BikeService, private router: Router) { }
 
   ngOnInit() {
@@ -40,11 +38,8 @@ export class BikeEditComponent implements OnInit {
     );
   }
 
-  // getControls() {
-  //   return(<FormArray>this.bikeForm.get('history')).controls;
-  // }
-
   private initForm() {
+    const bikeId = this.id;
     let bikeName = '';
     let bikeDescription = '';
     let bikeImagePath = '';
@@ -53,17 +48,6 @@ export class BikeEditComponent implements OnInit {
     let bikeRim = '';
     let bikeTyre = '';
     let bikeChainRings = [];
-
-    // this.name = name;
-    // this.description = description;
-    // this.type = type;
-    // this.status = status;
-    // this.imagePath = imagePath;
-    // this.rim = rim;
-    // this.tyre = tyre;
-    // this.chainRings = chainRings;
-
-    const bikeHistory = new FormArray([]);
 
     if (this.editMode) {
       const bike = this.bikeService.getBike(this.id);
@@ -78,6 +62,7 @@ export class BikeEditComponent implements OnInit {
     }
 
     this.bikeForm = new FormGroup({
+      'id': new FormControl(bikeId),
       'name': new FormControl(bikeName, Validators.required),
       'imagePath': new FormControl(bikeImagePath),
       'description': new FormControl(bikeDescription, Validators.required),
@@ -88,11 +73,10 @@ export class BikeEditComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('onsubmit');
     if (this.editMode) {
-      this.bikeService.updateBike(this.id, this.bikeForm.value);
+      this.bikeService.updateBike(this.bikeForm.value);
     } else {
-      this.bikeService.addBike(this.id, this.bikeForm.value);
+      this.bikeService.addBike(this.bikeForm.value);
     }
     this.router.navigate(['../'], {relativeTo: this.route});
   }
@@ -100,17 +84,4 @@ export class BikeEditComponent implements OnInit {
   onCancel() {
     this.router.navigate(['../'], {relativeTo: this.route});
   }
-
-  // onAddEvent() {
-  //   (<FormArray>this.bikeForm.get('history')).push(
-  //     new FormGroup({
-  //       'eventDate': new FormControl(null, Validators.required),
-  //       'eventDetail': new FormControl(null)
-  //     })
-  //   );
-  // }
-
-  // onDeleteEvent(index: number) {
-  //   (<FormArray>this.bikeForm.get('history')).removeAt(index);
-  // }
 }

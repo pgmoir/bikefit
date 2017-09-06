@@ -24,7 +24,6 @@ export class BikeListComponent implements OnInit, OnDestroy {
           this.bikes = bikes;
         }
       );
-    console.log('get bikes');
     this.bikes = this.bikeService.getBikes();
   }
 

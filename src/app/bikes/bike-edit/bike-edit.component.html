@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-xs-12">
     <form [formGroup]="bikeForm" (ngSubmit)="onSubmit()">
+      <input type="hidden" id="id" formControlName="id">
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
@@ -65,32 +66,6 @@
           </div>
         </div>
       </div>
-      <!-- <div class="row">
-        <div class="col-xs-12">
-          <h4>History</h4>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12" formArrayName="history">
-          <label *ngIf="formData.controls.length > 0">Date (required), Detail (required)</label>
-          <div class="row space-bottom" *ngFor="let bikeCtrl of formData.controls; let i = index" [formGroupName]="i">
-            <div class="col-xs-3">
-              <input type="text" class="form-control" formControlName="eventDate" required>
-            </div>
-            <div class="col-xs-7">
-              <input type="text" class="form-control" formControlName="eventDetail" required>
-            </div>
-            <div class="col-xs-2">
-              <button class="btn btn-danger" type="button" (click)="onDeleteEvent(i)">x</button>
-            </div>
-          </div>
-          <div class="row space-bottom">
-            <div class="col-xs-12">
-              <button type="button" class="btn btn-success" (click)="onAddEvent()">Add Event</button>
-            </div>
-          </div>
-        </div>
-      </div> -->
       <div class="row space-bottom">
         <div class="col-xs-12">
           <button [disabled]="!bikeForm.valid" type="submit" class="btn btn-success">Save</button>

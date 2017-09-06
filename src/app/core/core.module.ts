@@ -13,6 +13,7 @@ import { UrlHelperService } from '../shared/url-helper.service';
 import { GearCheckService } from '../gear-check/gear-check.service';
 import { AppRoutingModule } from '../app-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { BikeStorageService } from '../bikes/bike-storage.service';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { SharedModule } from '../shared/shared.module';
     GearCheckService,
     UrlHelperService,
     CyclistService,
+    BikeStorageService,
     BikeService,
     DataStorageService,
     AuthService,
