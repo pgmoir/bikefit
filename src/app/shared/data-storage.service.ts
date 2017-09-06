@@ -11,45 +11,25 @@ import { UUID } from 'angular2-uuid';
 export class DataStorageService {
   constructor(private httpClient: HttpClient, private bikeService: BikeService, private authService: AuthService) { }
 
-  getBikeList() {
-    
-  }
-
   getBikes() {
-    let uid = 'demo';
-    let authToken = '';
-    if (this.authService.getIdToken()) {
-      console.log('auth' + this.authService);
-      authToken = '?auth=' + this.authService.getIdToken();
-      uid = this.authService.getUserIdentifier();
-    }
-    this.httpClient.get<Bike[]>('https://youthgearcheck.firebaseio.com/' + uid + '/bikes.json' + authToken)
+    const user = this.authService.getUser();
+    this.httpClient.get<Bike[]>(`https://youthgearcheck.firebaseio.com/${user.uid}/bikes.json?auth=${user.token}`)
       .map(
-      (bikes) => {
-        for (const bike of bikes) {
-          if (!bike['history']) {
-            bike['history'] = [];
-          }
+        (bikes) => {
+          return bikes ? bikes : [];
         }
-        return bikes;
-      }
       )
       .subscribe(
-      (bikes: Bike[]) => {
-        this.bikeService.setBikes(bikes);
-      }
+        (bikes: Bike[]) => {
+          console.log(bikes);
+          this.bikeService.setBikes(bikes);
+        }
       );
-  }  
+  }
 
   storeBikes() {
-    const token = this.authService.getIdToken();
-    const uid = this.authService.getUserIdentifier();
-
-    this.storeKit();
-
-    return this.httpClient.put('https://youthgearcheck.firebaseio.com/' + uid + '/bikes.json?auth=' + token, this.bikeService.getBikes());
-
-
+    const user = this.authService.getUser();
+    return this.httpClient.put(`https://youthgearcheck.firebaseio.com/${user.uid}/bikes.json?auth=${user.token}`, this.bikeService.getBikes());
   }
 
   storeKit() {

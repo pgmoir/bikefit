@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthGuard } from '../auth/auth-guard.service';
 import { AuthService } from '../auth/auth.service';
+import { AuthInterceptor } from '../auth/auth.interceptor';
 import { DataStorageService } from '../shared/data-storage.service';
 import { BikeService } from '../bikes/bike.service';
 import { CyclistService } from '../cyclists/cyclist.service';
@@ -14,17 +16,17 @@ import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
-      HeaderComponent,
-      HomeComponent
+    HeaderComponent,
+    HomeComponent
   ],
   imports: [
-      SharedModule,
-      AppRoutingModule
+    SharedModule,
+    AppRoutingModule
   ],
   exports: [
-      AppRoutingModule,
-      HeaderComponent
-  ] ,
+    AppRoutingModule,
+    HeaderComponent
+  ],
   providers: [
     GearCheckService,
     UrlHelperService,
@@ -32,7 +34,8 @@ import { SharedModule } from '../shared/shared.module';
     BikeService,
     DataStorageService,
     AuthService,
-    AuthGuard
+    AuthGuard,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
 })
 export class CoreModule { }

@@ -48,27 +48,27 @@ export class BikeService {
   loadDemoBike() {
     console.log('loading');
 
-    const worxDemo = new Bike('Junior Worx', 'Road and Cycle Cross bike aimed at U8 – U10 riders.',
-    'http://cdn.mos.bikeradar.imdserve.com/images/news/2014/11/11/1415795477555-1wxd0um2z2e7n-630-354.jpg',
-    ['road', 'cyclocross'], 'demo', '24inch S5', '25mm', [34]);
+    // const worxDemo = new Bike('Junior Worx', 'Road and Cycle Cross bike aimed at U8 – U10 riders.',
+    // 'http://cdn.mos.bikeradar.imdserve.com/images/news/2014/11/11/1415795477555-1wxd0um2z2e7n-630-354.jpg',
+    // ['road', 'cyclocross'], 'demo', '24inch S5', '25mm', [34]);
 
     // additional properties
-    worxDemo.setAdvancedProperties('Worx hydroformed profiled aliuminium 6061 triple butted',
-      '24″ wheel', 'Worx tapered aerosection blades aliuminium', 'FSA ZS-4D',
-      'Microshift R9', 'WORX 7075', 'N/A', 'Microshift Short Reach 9 Speed',
-      'Tektro Oryx Canti', [11, 32], 9, 'Worx WRT 160', 'Kenda Road Tyre',
-      'Worx 140mm', 34, 'FSA', 'Worx 340mm Short Drop',
-      'Custom Junior', 'Worx', 'Wellgo', 600, 'Black & Blue', 8.6);
+    // worxDemo.setAdvancedProperties('Worx hydroformed profiled aliuminium 6061 triple butted',
+    //   '24″ wheel', 'Worx tapered aerosection blades aliuminium', 'FSA ZS-4D',
+    //   'Microshift R9', 'WORX 7075', 'N/A', 'Microshift Short Reach 9 Speed',
+    //   'Tektro Oryx Canti', [11, 32], 9, 'Worx WRT 160', 'Kenda Road Tyre',
+    //   'Worx 140mm', 34, 'FSA', 'Worx 340mm Short Drop',
+    //   'Custom Junior', 'Worx', 'Wellgo', 600, 'Black & Blue', 8.6);
 
-    worxDemo.setPurchaseSaleProperties(495, 'new', null);
+    // worxDemo.setPurchaseSaleProperties(495, 'new', null);
 
-    worxDemo.history = [
-      new BikeEvent(new Date(20151204), 'Purchased from Worx for £495', false, false, 'transaction'),
-      new BikeEvent(new Date(20160517), 'Punctured front tyre. Replaced inner tube.', false, false, 'repair'),
-      new BikeEvent(new Date(20160918), 'Replaced handlebar tape', false, false, 'repair')
-    ];
+    // worxDemo.history = [
+    //   new BikeEvent(new Date(20151204), 'Purchased from Worx for £495', false, false, 'transaction'),
+    //   new BikeEvent(new Date(20160517), 'Punctured front tyre. Replaced inner tube.', false, false, 'repair'),
+    //   new BikeEvent(new Date(20160918), 'Replaced handlebar tape', false, false, 'repair')
+    // ];
 
-    this.bikes.push(worxDemo);
+    // this.bikes.push(worxDemo);
   }
 
   setBikes(bikes: Bike[]) {
@@ -81,17 +81,22 @@ export class BikeService {
     return this.bikes.slice();
   }
 
-  getBike(index: number) {
-    return this.bikes[index];
+  getBike(id: string) {
+    return this.bikes.find(b => b.id === id);
   }
 
-  addBike(bike: Bike) {
-    console.log(bike.status);
+  addBike(id: string, bike: Bike) {
+    bike.id = id;
+    console.log(bike);
     this.bikes.push(bike);
     this.bikesChanged.next(this.bikes.slice());
   }
 
-  updateBike(index: number, bike: Bike) {
+  updateBike(id: string, bike: Bike) {
+    console.log('id' + id);
+    const index = this.bikes.findIndex(b => b.id === id);
+    console.log(index);
+    console.log(bike);
     this.bikes[index] = bike;
   }
 

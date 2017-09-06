@@ -12,7 +12,7 @@ import { BikeService } from '../bike.service';
 })
 export class BikeDetailComponent implements OnInit, OnDestroy {
   bike: Bike;
-  id: number;
+  id: string;
   paramsSubscription: Subscription;
 
   constructor(private bikeService: BikeService, private route: ActivatedRoute, private router: Router) { }
@@ -21,7 +21,7 @@ export class BikeDetailComponent implements OnInit, OnDestroy {
     this.paramsSubscription = this.route.params
       .subscribe(
         (params: Params) => {
-          this.id = +params['id'];
+          this.id = params['id'];
           this.bike = this.bikeService.getBike(this.id);
         }
       );
@@ -44,7 +44,7 @@ export class BikeDetailComponent implements OnInit, OnDestroy {
   }
 
   onDeleteBike() {
-    this.bikeService.deleteBike(this.id);
+    //this.bikeService.deleteBike(this.id);
     this.router.navigate(['/bikes']);
   }
 

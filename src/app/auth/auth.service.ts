@@ -74,4 +74,11 @@ export class AuthService {
     const user = firebase.auth().currentUser;
     return user ? user.uid : undefined;
   }
+
+  getUser() {
+    return {
+      token: this.getIdToken(),
+      uid: this.getUserIdentifier()
+    };
+  }
 }
