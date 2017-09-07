@@ -27,8 +27,8 @@ export class BikeService {
   }
 
   addBike(bike: Bike) {
-    this.bikes.push(bike);
-    this.bikesChanged.next(this.bikes.slice());
+    // this.bikes.push(bike);
+    // this.bikesChanged.next(this.bikes.slice());
     this.bikeStorageService.storeBike(bike);
   }
 

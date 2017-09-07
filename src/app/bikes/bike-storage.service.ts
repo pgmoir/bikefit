@@ -15,12 +15,21 @@ export class BikeStorageService {
     }
 
     const url = `https://youthgearcheck.firebaseio.com/${user.uid}/bikes.json`;
-    this.httpClient.get<Bike[]>(url, { params: new HttpParams().set('auth', user.token) })
-      .subscribe(
-        (bikes: Bike[]) => {
-          return bikes;
-        }
-      );
+    const bikesResult = this.httpClient.get<Bike[]>(url, { params: new HttpParams().set('auth', user.token) })
+      .map((bikes: any) => {
+        const newBikes = [];
+        (Object.keys(bikes)).forEach(k => {
+          const newBike: Bike = bikes[k];
+          newBike.id = k;
+          newBikes.push(newBike);
+        });
+        return newBikes;
+      })
+      .subscribe((bikes: Bike[]) => {
+        console.log(bikes);
+      });
+
+      return bikesResult;
   }
 
   storeBike(bike: Bike) {
@@ -31,8 +40,9 @@ export class BikeStorageService {
 
     const url = `https://youthgearcheck.firebaseio.com/${user.uid}/bikes.json`;
     const bikeretu = this.httpClient.post(url, bike, { params: new HttpParams().set('auth', user.token) })
-      .subscribe();
-    console.log(bikeretu);
+      .subscribe(
+      (response) => console.log(response)
+      );
     return bikeretu;
   }
 

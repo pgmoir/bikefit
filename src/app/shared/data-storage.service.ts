@@ -13,10 +13,16 @@ export class DataStorageService {
 
   getBikes() {
     const user = this.authService.getUser();
-    this.httpClient.get<Bike[]>(`https://youthgearcheck.firebaseio.com/${user.uid}/bikes.json?auth=${user.token}`)
+    this.httpClient.get(`https://youthgearcheck.firebaseio.com/${user.uid}/bikes.json?auth=${user.token}`)
       .map(
-        (bikes) => {
-          return bikes ? bikes : [];
+        (bikes: any) => {
+          const newBikes = [];
+          (Object.keys(bikes)).forEach(k => {
+            const newBike: Bike = bikes[k];
+            newBike.id = k;
+            newBikes.push(newBike);
+          });
+          return newBikes;
         }
       )
       .subscribe(
