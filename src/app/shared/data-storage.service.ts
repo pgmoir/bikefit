@@ -11,31 +11,31 @@ import { UUID } from 'angular2-uuid';
 export class DataStorageService {
   constructor(private httpClient: HttpClient, private bikeService: BikeService, private authService: AuthService) { }
 
-  getBikes() {
-    const user = this.authService.getUser();
-    this.httpClient.get(`https://youthgearcheck.firebaseio.com/${user.uid}/bikes.json?auth=${user.token}`)
-      .map(
-        (bikes: any) => {
-          const newBikes = [];
-          (Object.keys(bikes)).forEach(k => {
-            const newBike: Bike = bikes[k];
-            newBike.id = k;
-            newBikes.push(newBike);
-          });
-          return newBikes;
-        }
-      )
-      .subscribe(
-        (bikes: Bike[]) => {
-          this.bikeService.setBikes(bikes);
-        }
-      );
-  }
+  // getBikes() {
+  //   const user = this.authService.getUser();
+  //   this.httpClient.get(`https://youthgearcheck.firebaseio.com/${user.uid}/bikes.json?auth=${user.token}`)
+  //     .map(
+  //       (bikes: any) => {
+  //         const newBikes = [];
+  //         (Object.keys(bikes)).forEach(k => {
+  //           const newBike: Bike = bikes[k];
+  //           newBike.id = k;
+  //           newBikes.push(newBike);
+  //         });
+  //         return newBikes;
+  //       }
+  //     )
+  //     .subscribe(
+  //       (bikes: Bike[]) => {
+  //         this.bikeService.setBikes(bikes);
+  //       }
+  //     );
+  // }
 
-  storeBikes() {
-    const user = this.authService.getUser();
-    return this.httpClient.put(`https://youthgearcheck.firebaseio.com/${user.uid}/bikes.json?auth=${user.token}`, this.bikeService.getBikes());
-  }
+  // storeBikes() {
+  //   const user = this.authService.getUser();
+  //   return this.httpClient.put(`https://youthgearcheck.firebaseio.com/${user.uid}/bikes.json?auth=${user.token}`, this.bikeService.getBikes());
+  // }
 
   storeKit() {
     return;

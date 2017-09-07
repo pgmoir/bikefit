@@ -1,8 +1,8 @@
-import { BikeStorageService } from './bike-storage.service';
-import { AuthService } from './../auth/auth.service';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Rx';
 
+import { AuthService } from './../auth/auth.service';
 import { Bike } from './../shared/models/bike.model';
 
 @Injectable()
@@ -11,7 +11,10 @@ export class BikeService {
 
   private bikes: Bike[] = [];
 
-  constructor(private authService: AuthService, private bikeStorageService: BikeStorageService) { }
+  private isDemoBikesLoaded = false;
+  private isUserBikesLoaded = false;
+
+  constructor(private authService: AuthService, private httpClient: HttpClient) { }
 
   setBikes(bikes: Bike[]) {
     this.bikes = bikes;
@@ -19,6 +22,7 @@ export class BikeService {
   }
 
   getBikes() {
+    this.checkBikesLoaded();
     return this.bikes.slice();
   }
 
@@ -27,9 +31,8 @@ export class BikeService {
   }
 
   addBike(bike: Bike) {
-    // this.bikes.push(bike);
-    // this.bikesChanged.next(this.bikes.slice());
-    this.bikeStorageService.storeBike(bike);
+    this.storeBike(bike);
+    this.loadUserBikes();
   }
 
   updateBike(bike: Bike) {
@@ -43,6 +46,43 @@ export class BikeService {
     this.bikes.splice(index, 1);
     this.bikesChanged.next(this.bikes.slice());
   }
+
+  // private database loading functions
+  private checkBikesLoaded() {
+    if (!this.isUserBikesLoaded && this.authService.isAuthenticated()) {
+      this.loadUserBikes();
+      this.isUserBikesLoaded = true;
+    }
+  }
+
+  private loadUserBikes() {
+    const user = this.authService.getUser();
+    const url = `https://youthgearcheck.firebaseio.com/${user.uid}/bikes.json`;
+    this.httpClient.get<Bike[]>(url, { params: new HttpParams().set('auth', user.token) })
+      .map((bikes: any) => {
+        const newBikes = [];
+        (Object.keys(bikes)).forEach(key => {
+          const newBike: Bike = bikes[key];
+          newBike.id = key;
+          newBikes.push(newBike);
+        });
+        return newBikes;
+      })
+      .subscribe((bikes: Bike[]) => {
+        this.setBikes(bikes);
+      });
+  }
+
+  storeBike(bike: Bike) {
+    const user = this.authService.getUser();
+    const url = `https://youthgearcheck.firebaseio.com/${user.uid}/bikes.json`;
+    this.httpClient.post(url, bike, { params: new HttpParams().set('auth', user.token) })
+      .subscribe(
+        (response) => console.log(response)
+      );
+  }
+
+
 }
 
   //   new Bike('Sab', 'Alu commute bike',
@@ -100,3 +140,5 @@ export class BikeService {
   //   // }
 
   // }
+
+

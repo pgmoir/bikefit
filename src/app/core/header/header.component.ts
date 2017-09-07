@@ -14,12 +14,12 @@ export class HeaderComponent {
   constructor(private dataStorageService: DataStorageService, private authService: AuthService) { }
 
   onSaveData() {
-    this.dataStorageService.storeBikes()
-      .subscribe(
-      (response: Response) => {
-        console.log(response);
-      }
-      );
+    // this.dataStorageService.storeBikes()
+    //   .subscribe(
+    //   (response: Response) => {
+    //     console.log(response);
+    //   }
+    //   );
     // let newId = UUID.UUID();
     // let kitCore = { id: newId, brand: 'Nike', color: 'white', type: 'trainer' };
     // this.dataStorageService.storeKitCore(kitCore).subscribe((response: Response) => console.log(response));
@@ -49,7 +49,7 @@ export class HeaderComponent {
   }
 
   onFetchData() {
-    this.dataStorageService.getBikes();
+    //this.dataStorageService.getBikes();
   }
 
   onLogout() {
