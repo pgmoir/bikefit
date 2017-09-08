@@ -16,11 +16,6 @@ export class BikeService {
 
   constructor(private authService: AuthService, private httpClient: HttpClient) { }
 
-  setBikes(bikes: Bike[]) {
-    this.bikes = bikes;
-    this.bikesChanged.next(this.bikes.slice());
-  }
-
   getBikes() {
     this.checkBikesLoaded();
     return this.bikes.slice();
@@ -31,20 +26,15 @@ export class BikeService {
   }
 
   addBike(bike: Bike) {
-    this.storeBike(bike);
-    this.loadUserBikes();
+    this.saveUserBike(bike);
   }
 
   updateBike(bike: Bike) {
-    const index = this.bikes.findIndex(b => b.id === bike.id);
-    this.bikes[index] = bike;
-    this.bikesChanged.next(this.bikes.slice());
+    this.updateUserBike(bike);
   }
 
   deleteBike(id: string) {
-    const index = this.bikes.findIndex(b => b.id === id);
-    this.bikes.splice(index, 1);
-    this.bikesChanged.next(this.bikes.slice());
+    this.deleteUserBike(id);
   }
 
   // private database loading functions
@@ -63,23 +53,48 @@ export class BikeService {
         const newBikes = [];
         (Object.keys(bikes)).forEach(key => {
           const newBike: Bike = bikes[key];
-          newBike.id = key;
           newBikes.push(newBike);
         });
         return newBikes;
       })
       .subscribe((bikes: Bike[]) => {
-        this.setBikes(bikes);
+        this.bikes = bikes;
+        this.bikesChanged.next(this.bikes.slice());
       });
   }
 
-  storeBike(bike: Bike) {
+  private saveUserBike(bike: Bike) {
     const user = this.authService.getUser();
     const url = `https://youthgearcheck.firebaseio.com/${user.uid}/bikes.json`;
     this.httpClient.post(url, bike, { params: new HttpParams().set('auth', user.token) })
-      .subscribe(
-        (response) => console.log(response)
-      );
+      .subscribe((response) => {
+        bike.id = response['name'];
+        this.bikes.push(bike);
+        this.bikesChanged.next(this.bikes.slice());
+      });
+  }
+
+  private deleteUserBike(id: string) {
+    const user = this.authService.getUser();
+    const url = `https://youthgearcheck.firebaseio.com/${user.uid}/bikes/${id}.json`;
+    this.httpClient.delete(url, { params: new HttpParams().set('auth', user.token) })
+      .subscribe((response) => {
+        const index = this.bikes.findIndex(b => b.id === id);
+        this.bikes.splice(index, 1);
+        this.bikesChanged.next(this.bikes.slice());
+      });
+  }
+
+  private updateUserBike(bike: Bike) {
+    const user = this.authService.getUser();
+    const url = `https://youthgearcheck.firebaseio.com/${user.uid}/bikes/${bike.id}.json`;
+    this.httpClient.put(url, bike, { params: new HttpParams().set('auth', user.token) })
+      .subscribe((response) => {
+        console.log(response);
+        const index = this.bikes.findIndex(b => b.id === bike.id);
+        this.bikes[index] = bike;
+        this.bikesChanged.next(this.bikes.slice());
+      });
   }
 
 

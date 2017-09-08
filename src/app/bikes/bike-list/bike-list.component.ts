@@ -18,6 +18,7 @@ export class BikeListComponent implements OnInit, OnDestroy {
   constructor(private bikeService: BikeService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    console.log('bikes list init');
     this.subscription = this.bikeService.bikesChanged
       .subscribe(
         (bikes: Bike[]) => {

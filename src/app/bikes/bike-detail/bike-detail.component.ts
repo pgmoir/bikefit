@@ -44,7 +44,7 @@ export class BikeDetailComponent implements OnInit, OnDestroy {
   }
 
   onDeleteBike() {
-    //this.bikeService.deleteBike(this.id);
+    this.bikeService.deleteBike(this.id);
     this.router.navigate(['/bikes']);
   }
 

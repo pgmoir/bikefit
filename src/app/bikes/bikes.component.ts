@@ -13,6 +13,7 @@ export class BikesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('bikes component init');
   }
 
 }

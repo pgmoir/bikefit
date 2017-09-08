@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Form, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { UUID } from 'angular2-uuid';
 
 import { BikeService } from '../bike.service';
 
@@ -31,7 +30,7 @@ export class BikeEditComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(
       (params: Params) => {
-        this.id = params['id'] ? params['id'] : UUID.UUID();
+        this.id = params['id'];
         this.editMode = params['id'] != null;
         this.initForm();
       }
@@ -39,7 +38,7 @@ export class BikeEditComponent implements OnInit {
   }
 
   private initForm() {
-    const bikeId = this.id;
+    let bikeId = '';
     let bikeName = '';
     let bikeDescription = '';
     let bikeImagePath = '';
@@ -51,6 +50,7 @@ export class BikeEditComponent implements OnInit {
 
     if (this.editMode) {
       const bike = this.bikeService.getBike(this.id);
+      bikeId = this.id;
       bikeName = bike.name;
       bikeImagePath = bike.imagePath;
       bikeDescription = bike.description;
