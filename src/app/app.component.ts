@@ -9,18 +9,29 @@ import * as firebase from 'firebase';
 })
 export class AppComponent implements OnInit {
   loadedFeature = 'gear-check';
+  user = null;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    firebase.initializeApp({
-      apiKey: 'AIzaSyDklQWpXJzdt4RRlYEZSF0LXThamRVtrYo',
-      authDomain: 'youthgearcheck.firebaseapp.com'
-    });
-    this.authService.checkForExistingUser();
+    this.authService.getAuthState().subscribe(
+      (user) => this.user = user);
+    // firebase.initializeApp({
+    //   apiKey: 'AIzaSyDklQWpXJzdt4RRlYEZSF0LXThamRVtrYo',
+    //   authDomain: 'youthgearcheck.firebaseapp.com'
+    // });
+    // this.authService.checkForExistingUser();
   }
 
   onNavigate(feature: string) {
     this.loadedFeature = feature;
+  }
+
+  isLoggedIn() {
+    return this.authService.isLoggedIn();
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

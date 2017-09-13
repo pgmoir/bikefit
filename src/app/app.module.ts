@@ -1,8 +1,13 @@
+import { environment } from './../environments/environment';
 import { CoreModule } from './core/core.module';
 import { NgModule, PipeTransform } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
@@ -42,7 +47,10 @@ import { AppComponent } from './app.component';
     SharedModule,
     AuthModule,
     CoreModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase, 'youthgearcheck'),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [
     AppComponent

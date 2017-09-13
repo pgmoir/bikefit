@@ -39,16 +39,16 @@ export class BikeService {
 
   // private database loading functions
   private checkBikesLoaded() {
-    if (!this.isUserBikesLoaded && this.authService.isAuthenticated()) {
+    if (!this.isUserBikesLoaded && this.authService.isLoggedIn()) {
       this.loadUserBikes();
       this.isUserBikesLoaded = true;
     }
   }
 
   private loadUserBikes() {
-    const user = this.authService.getUser();
+    const user = this.authService.currentUser;
     const url = `https://youthgearcheck.firebaseio.com/${user.uid}/bikes.json`;
-    this.httpClient.get<Bike[]>(url, { params: new HttpParams().set('auth', user.token) })
+    this.httpClient.get<Bike[]>(url, { params: new HttpParams().set('auth', user.refreshToken) })
       .map((bikes: any) => {
         const newBikes = [];
         (Object.keys(bikes)).forEach(key => {
@@ -64,9 +64,9 @@ export class BikeService {
   }
 
   private saveUserBike(bike: Bike) {
-    const user = this.authService.getUser();
+    const user = this.authService.currentUser;
     const url = `https://youthgearcheck.firebaseio.com/${user.uid}/bikes.json`;
-    this.httpClient.post(url, bike, { params: new HttpParams().set('auth', user.token) })
+    this.httpClient.post(url, bike, { params: new HttpParams().set('auth', user.refreshToken) })
       .subscribe((response) => {
         bike.id = response['name'];
         this.bikes.push(bike);
@@ -75,9 +75,9 @@ export class BikeService {
   }
 
   private deleteUserBike(id: string) {
-    const user = this.authService.getUser();
+    const user = this.authService.currentUser;
     const url = `https://youthgearcheck.firebaseio.com/${user.uid}/bikes/${id}.json`;
-    this.httpClient.delete(url, { params: new HttpParams().set('auth', user.token) })
+    this.httpClient.delete(url, { params: new HttpParams().set('auth', user.refreshToken) })
       .subscribe((response) => {
         const index = this.bikes.findIndex(b => b.id === id);
         this.bikes.splice(index, 1);
@@ -86,9 +86,9 @@ export class BikeService {
   }
 
   private updateUserBike(bike: Bike) {
-    const user = this.authService.getUser();
+    const user = this.authService.currentUser;
     const url = `https://youthgearcheck.firebaseio.com/${user.uid}/bikes/${bike.id}.json`;
-    this.httpClient.put(url, bike, { params: new HttpParams().set('auth', user.token) })
+    this.httpClient.put(url, bike, { params: new HttpParams().set('auth', user.refreshToken) })
       .subscribe((response) => {
         console.log(response);
         const index = this.bikes.findIndex(b => b.id === bike.id);

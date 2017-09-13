@@ -57,6 +57,6 @@ export class HeaderComponent {
   }
 
   isAuthenticated() {
-    return this.authService.isAuthenticated();
+    return this.authService.isLoggedIn();
   }
 }
