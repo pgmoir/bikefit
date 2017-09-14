@@ -230,7 +230,8 @@ export class AuthService {
       name: this.authState.displayName
     };
 
-    this.db.object(path).update(data)
-    .catch(error => console.log(error));
+    this.router.navigate(['/']);
+    // this.db.object(path).update(data)
+    // .catch(error => console.log(error));
   }
 }

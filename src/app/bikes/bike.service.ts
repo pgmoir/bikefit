@@ -1,40 +1,44 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { AuthService } from '../auth/auth.service';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Rx';
-
-import { AuthService } from './../auth/auth.service';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Bike } from './../shared/models/bike.model';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Subject } from 'rxjs/Rx';
 
 @Injectable()
 export class BikeService {
-  bikesChanged = new Subject<Bike[]>();
+ bikesChanged = new Subject<Bike[]>();
 
-  private bikes: Bike[] = [];
+  // private bikes: Bike[] = [];
 
   private isDemoBikesLoaded = false;
   private isUserBikesLoaded = false;
 
-  constructor(private authService: AuthService, private httpClient: HttpClient) { }
+  bikes: FirebaseListObservable<any[]>;
+
+  constructor(private db: AngularFireDatabase, private authService: AuthService) {
+    console.log('bike service');
+  }
 
   getBikes() {
     this.checkBikesLoaded();
-    return this.bikes.slice();
   }
 
   getBike(id: string) {
-    return this.bikes.find(b => b.id === id);
+    return null;
+    // return this.bikes.find(b => b.id === id);
   }
 
   addBike(bike: Bike) {
-    this.saveUserBike(bike);
+    // this.saveUserBike(bike);
   }
 
   updateBike(bike: Bike) {
-    this.updateUserBike(bike);
+    // this.updateUserBike(bike);
   }
 
   deleteBike(id: string) {
-    this.deleteUserBike(id);
+    // this.deleteUserBike(id);
   }
 
   // private database loading functions
@@ -46,56 +50,61 @@ export class BikeService {
   }
 
   private loadUserBikes() {
-    const user = this.authService.currentUser;
-    const url = `https://youthgearcheck.firebaseio.com/${user.uid}/bikes.json`;
-    this.httpClient.get<Bike[]>(url, { params: new HttpParams().set('auth', user.refreshToken) })
-      .map((bikes: any) => {
-        const newBikes = [];
-        (Object.keys(bikes)).forEach(key => {
-          const newBike: Bike = bikes[key];
-          newBikes.push(newBike);
-        });
-        return newBikes;
-      })
-      .subscribe((bikes: Bike[]) => {
-        this.bikes = bikes;
-        this.bikesChanged.next(this.bikes.slice());
-      });
+    const url = '/' + this.authService.currentUserId + '/bikes';
+    console.log(url);
+    this.bikes = this.db.list(url);
+
+
+    // const user = this.authService.currentUser;
+    // const url = `https://youthgearcheck.firebaseio.com/${user.uid}/bikes.json`;
+    // this.httpClient.get<Bike[]>(url, { params: new HttpParams().set('auth', user.refreshToken) })
+    //   .map((bikes: any) => {
+    //     const newBikes = [];
+    //     (Object.keys(bikes)).forEach(key => {
+    //       const newBike: Bike = bikes[key];
+    //       newBikes.push(newBike);
+    //     });
+    //     return newBikes;
+    //   })
+    //   .subscribe((bikes: Bike[]) => {
+    //     this.bikes = bikes;
+    //     this.bikesChanged.next(this.bikes.slice());
+    //   });
   }
 
-  private saveUserBike(bike: Bike) {
-    const user = this.authService.currentUser;
-    const url = `https://youthgearcheck.firebaseio.com/${user.uid}/bikes.json`;
-    this.httpClient.post(url, bike, { params: new HttpParams().set('auth', user.refreshToken) })
-      .subscribe((response) => {
-        bike.id = response['name'];
-        this.bikes.push(bike);
-        this.bikesChanged.next(this.bikes.slice());
-      });
-  }
+  // private saveUserBike(bike: Bike) {
+  //   const user = this.authService.currentUser;
+  //   const url = `https://youthgearcheck.firebaseio.com/${user.uid}/bikes.json`;
+  //   this.httpClient.post(url, bike, { params: new HttpParams().set('auth', user.refreshToken) })
+  //     .subscribe((response) => {
+  //       bike.id = response['name'];
+  //       this.bikes.push(bike);
+  //       this.bikesChanged.next(this.bikes.slice());
+  //     });
+  // }
 
-  private deleteUserBike(id: string) {
-    const user = this.authService.currentUser;
-    const url = `https://youthgearcheck.firebaseio.com/${user.uid}/bikes/${id}.json`;
-    this.httpClient.delete(url, { params: new HttpParams().set('auth', user.refreshToken) })
-      .subscribe((response) => {
-        const index = this.bikes.findIndex(b => b.id === id);
-        this.bikes.splice(index, 1);
-        this.bikesChanged.next(this.bikes.slice());
-      });
-  }
+  // private deleteUserBike(id: string) {
+  //   const user = this.authService.currentUser;
+  //   const url = `https://youthgearcheck.firebaseio.com/${user.uid}/bikes/${id}.json`;
+  //   this.httpClient.delete(url, { params: new HttpParams().set('auth', user.refreshToken) })
+  //     .subscribe((response) => {
+  //       const index = this.bikes.findIndex(b => b.id === id);
+  //       this.bikes.splice(index, 1);
+  //       this.bikesChanged.next(this.bikes.slice());
+  //     });
+  // }
 
-  private updateUserBike(bike: Bike) {
-    const user = this.authService.currentUser;
-    const url = `https://youthgearcheck.firebaseio.com/${user.uid}/bikes/${bike.id}.json`;
-    this.httpClient.put(url, bike, { params: new HttpParams().set('auth', user.refreshToken) })
-      .subscribe((response) => {
-        console.log(response);
-        const index = this.bikes.findIndex(b => b.id === bike.id);
-        this.bikes[index] = bike;
-        this.bikesChanged.next(this.bikes.slice());
-      });
-  }
+  // private updateUserBike(bike: Bike) {
+  //   const user = this.authService.currentUser;
+  //   const url = `https://youthgearcheck.firebaseio.com/${user.uid}/bikes/${bike.id}.json`;
+  //   this.httpClient.put(url, bike, { params: new HttpParams().set('auth', user.refreshToken) })
+  //     .subscribe((response) => {
+  //       console.log(response);
+  //       const index = this.bikes.findIndex(b => b.id === bike.id);
+  //       this.bikes[index] = bike;
+  //       this.bikesChanged.next(this.bikes.slice());
+  //     });
+  // }
 
 
 }

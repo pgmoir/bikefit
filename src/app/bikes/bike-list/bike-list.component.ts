@@ -19,17 +19,17 @@ export class BikeListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     console.log('bikes list init');
-    this.subscription = this.bikeService.bikesChanged
-      .subscribe(
-        (bikes: Bike[]) => {
-          this.bikes = bikes;
-        }
-      );
-    this.bikes = this.bikeService.getBikes();
+    // this.subscription = this.bikeService.bikesChanged
+    //   .subscribe(
+    //     (bikes: Bike[]) => {
+    //       this.bikes = bikes;
+    //     }
+    //   );
+    this.bikeService.getBikes();
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    //this.subscription.unsubscribe();
   }
 
   onNewBike() {
