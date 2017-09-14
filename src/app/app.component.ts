@@ -9,13 +9,12 @@ import * as firebase from 'firebase';
 })
 export class AppComponent implements OnInit {
   loadedFeature = 'gear-check';
-  user = null;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.authService.getAuthState().subscribe(
-      (user) => this.user = user);
+    // this.authService.authState.subscribe(
+    //   (user) => this.user = user);
     // firebase.initializeApp({
     //   apiKey: 'AIzaSyDklQWpXJzdt4RRlYEZSF0LXThamRVtrYo',
     //   authDomain: 'youthgearcheck.firebaseapp.com'
@@ -27,11 +26,11 @@ export class AppComponent implements OnInit {
     this.loadedFeature = feature;
   }
 
-  isLoggedIn() {
-    return this.authService.isLoggedIn();
+  authenticated() {
+    return this.authService.authenticated;
   }
 
   logout() {
-    this.authService.logout();
+    this.authService.signOut();
   }
 }

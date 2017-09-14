@@ -49,14 +49,14 @@ export class HeaderComponent {
   }
 
   onFetchData() {
-    //this.dataStorageService.getBikes();
+    // this.dataStorageService.getBikes();
   }
 
   onLogout() {
-    this.authService.logout();
+    this.authService.signOut();
   }
 
   isAuthenticated() {
-    return this.authService.isLoggedIn();
+    return this.authService.authenticated;
   }
 }

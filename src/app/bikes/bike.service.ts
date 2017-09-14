@@ -39,7 +39,7 @@ export class BikeService {
 
   // private database loading functions
   private checkBikesLoaded() {
-    if (!this.isUserBikesLoaded && this.authService.isLoggedIn()) {
+    if (!this.isUserBikesLoaded && this.authService.authenticated) {
       this.loadUserBikes();
       this.isUserBikesLoaded = true;
     }
