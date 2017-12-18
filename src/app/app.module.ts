@@ -10,7 +10,6 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 
 import { DateControlComponent } from './common/date-control/date-control.component';
@@ -26,6 +25,13 @@ import { UnlessDirective } from './shared/directives/unless.directive';
 
 import { AppComponent } from './app.component';
 
+import { LoginComponent } from './auth/login/login.component';
+import { AuthRoutingModule } from './auth/auth-routing.module';
+import { SignupComponent } from './auth/signup/signup.component';
+import { LoginEmailComponent } from './auth/login-email/login-email.component';
+import { RegisterEmailComponent } from './auth/register-email/register-email.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +43,11 @@ import { AppComponent } from './app.component';
     AnotherHighlightDirective,
     FourthHighlightDirective,
     UnlessDirective,
-    NotFoundComponent
+    NotFoundComponent,
+    LoginComponent,
+    SignupComponent,
+    LoginEmailComponent,
+    RegisterEmailComponent
   ],
   imports: [
     BrowserModule,
@@ -45,12 +55,12 @@ import { AppComponent } from './app.component';
     ReactiveFormsModule,
     HttpClientModule,
     SharedModule,
-    AuthModule,
     CoreModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase, 'youthgearcheck'),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AuthRoutingModule
   ],
   bootstrap: [
     AppComponent

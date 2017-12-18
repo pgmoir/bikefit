@@ -50,7 +50,7 @@ export class BikeService {
   }
 
   private loadUserBikes() {
-    const url = '/' + this.authService.currentUserId + '/bikes';
+    const url = '/' + this.authService.uid + '/bikes';
     console.log(url);
     this.bikes = this.db.list(url);
 
