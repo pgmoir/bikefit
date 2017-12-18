@@ -17,7 +17,7 @@
 </div>
 <div class="row space-bottom">
   <div class="col-xs-12">
-    <app-bike-item *ngFor="let bikeEl of bikeService.bikes | async" [bike]="bikeEl" [index]="bikeEl.id"></app-bike-item>
+    <app-bike-item *ngFor="let bikeEl of bikes" [bike]="bikeEl" (bikeSelected)="onBikeSelected(bikeEl)"></app-bike-item>
   </div>
 </div>
 <div class="row space-bottom">

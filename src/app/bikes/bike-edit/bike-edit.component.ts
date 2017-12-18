@@ -76,6 +76,7 @@ export class BikeEditComponent implements OnInit {
     if (this.editMode) {
       this.bikeService.updateBike(this.bikeForm.value);
     } else {
+      console.log(this.bikeForm.value);
       this.bikeService.addBike(this.bikeForm.value);
     }
     this.router.navigate(['../'], {relativeTo: this.route});

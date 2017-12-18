@@ -16,8 +16,10 @@ export class BikeService {
 
   bikes: FirebaseListObservable<any[]>;
 
+  submit = {};
+
   constructor(private db: AngularFireDatabase, private authService: AuthService) {
-    console.log('bike service');
+    // this.bikes = this.db.list('/' + this.authService.uid + '/bikes');
   }
 
   getBikes() {
@@ -30,7 +32,12 @@ export class BikeService {
   }
 
   addBike(bike: Bike) {
-    // this.saveUserBike(bike);
+    this.bikes.push(bike).then(
+      (item) => {
+        this.submit = {
+          // do nothing
+        };
+      });
   }
 
   updateBike(bike: Bike) {
@@ -50,7 +57,7 @@ export class BikeService {
   }
 
   private loadUserBikes() {
-    const url = '/' + this.authService.currentUserId + '/bikes';
+    const url = '/' + this.authService.uid + '/bikes';
     console.log(url);
     this.bikes = this.db.list(url);
 

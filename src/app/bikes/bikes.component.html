@@ -6,9 +6,13 @@
 </div>
 <div class="row">
   <div class="col-md-4">
-    <app-bike-list></app-bike-list>
+    <app-bike-list (bikeWasSelected)="selectedBike = $event"></app-bike-list>
   </div>
   <div class="col-md-8">
-    <router-outlet></router-outlet>
+    <app-bike-detail *ngIf="selectedBike; else infoText" [bike]="selectedBike"></app-bike-detail>
+    <ng-template #infoText>
+      <p>Please select a bike</p>
+    </ng-template>
+    <!-- <router-outlet></router-outlet> -->
   </div>
 </div>

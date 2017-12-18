@@ -1,0 +1,30 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Login</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <form (ngSubmit)="login(f)" #f="ngForm">
+        <div class="form-group">
+          <label for="email" class="form-label">Email</label>
+          <input type="text" name="email" (ngModel)="email" class="form-control" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"required>
+        </div>
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" name="password" (ngModel)="password" class="form-control" required>
+        </div>
+        <div class="alert alert-danger" *ngIf="error">
+          {{ error }}
+        </div>
+        <div class="form-group">
+          <button class="btn btn-success" type="submit" [disabled]="!f.valid">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>

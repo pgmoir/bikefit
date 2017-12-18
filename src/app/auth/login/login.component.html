@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <img src="./../../assets/lock.svg" class="lock">
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+  <div class="alert alert-info" role="alert">
+    <strong>Glad to see you're coming back!</strong> Just choose the login option that you set your account up with.
+  </div>
+  <div class="alert alert-warning" role="alert">
+    <strong>Not signed up yet?</strong> Then
+    <a routerLink="/signup" class="alert-link">Sign up here</a>
+  </div>
+  <div class="alert alert-danger" *ngIf="error">
+    {{ error }}
+  </div>
+  <div class="row">
+    <button class="facebook" (click)="loginFacebook()">Login using Facebook</button>
+  </div>
+  <div class="row">
+    <button class="google" (click)="loginGoogle()">Login using Google</button>
+  </div>
+  <div class="row">
+    <button class="email" routerLink="/login-email">Login using Email</button>
+  </div>
+  <div class="row">
+    <a routerLink="/signup" routerLinkActive="active" class="alc">No account?
+      <strong>Create one here</strong>
+    </a>
+  </div>
+</div>
