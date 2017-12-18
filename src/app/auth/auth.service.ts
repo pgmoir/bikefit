@@ -18,11 +18,10 @@ export class AuthService implements OnDestroy {
     this.user = afAuth.authState;
     this.userSubscription = this.user.subscribe(
       (auth) => {
-        // console.log('authService', auth);
         if (auth == null) {
           this.authenticated = false;
         } else {
-          this.displayName = auth.displayName;
+          this.displayName = !auth.displayName ? auth.email : auth.displayName ;
           this.email = auth.email;
           this.uid = auth.uid;
           this.authenticated = true;
@@ -33,6 +32,5 @@ export class AuthService implements OnDestroy {
 
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
-    // console.log('authService destroy');
   }
 }

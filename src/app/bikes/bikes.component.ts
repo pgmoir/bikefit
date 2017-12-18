@@ -1,3 +1,4 @@
+import { Bike } from './../shared/models/bike.model';
 import { DataStorageService } from './../shared/data-storage.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,6 +10,7 @@ import { BikeService } from './bike.service';
   styleUrls: ['./bikes.component.css']
 })
 export class BikesComponent implements OnInit {
+  selectedBike: Bike;
 
   constructor() { }
 
